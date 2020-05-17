@@ -1,0 +1,21 @@
+<div class="group">
+<nav>
+  <div class="toggle">
+   <a (click)="toggle()"> <i class="fa fa-bars" aria-hidden="true" ></i></a>
+
+  </div>
+<div id="items">
+  <ul>
+
+    <li routerLink="/create-plan" ><a  (click)="toggleFalse()">Create Plan</a> </li>
+    <li routerLink="/yourPlans"><a >Your Plans</a></li>
+    <li routerLink="/recipes"><a>Recipes</a></li>
+    <li routerLink="/details"><a  >Body Analysis</a></li>
+    <li routerLink="/covid"><a  >Fight Covid-19</a></li>
+    <li routerLink="/settings"><a  >Settings</a></li>
+    <li routerLink="/contact-us"><a  >Contact us</a></li>
+    <li routerLink="/" (click)="signout()"><a  >SignOut</a> </li>
+  </ul>
+</div>
+</nav>
+</div>

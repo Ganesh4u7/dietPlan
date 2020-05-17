@@ -1,0 +1,252 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="main-container">
+  <div class="head">
+    <h2 style="text-align: center; margin-top:30px;margin-bottom: 30px; color: #006600">Your Body Analysis</h2>
+  </div>
+  <div class="container1">
+
+
+    <h2 style="color: #006600">Your BMI ( Body Mass Index )</h2>
+    <p style="text-align: left;color: #006600;font-weight: bold"><i style="font-size: 24px; margin-right:5px;color: #006600" class="fas fa-weight"></i>:  {{details.weight}} Kgs</p>
+    <p style="text-align: left; margin-left:10px; color: #006600;font-weight: bold"><i style="font-size: 24px;margin-right:5px;color: #006600" class="fas fa-arrows-alt-v"></i>: {{details.feet}}''{{details.inch}}</p>
+
+            <div class="chart">
+                <fusioncharts
+                  type="angulargauge"
+                  width={{width}}
+                  height={{height}}
+                  dataFormat="json"
+                  [dataSource]="dataSource"
+                ></fusioncharts>
+            </div>
+
+
+            <div class="bmiInfo">
+              <!--<img src="../../assets/BMI-classification.png">-->
+              <table style="width: 100%; text-align: left;" id="customers">
+                <tr>
+                  <th>Classification</th>
+                  <th>BMI</th>
+                </tr>
+                <tr>
+                  <td> Severe thinness </td>
+                  <td> < 16 </td>
+                </tr>
+                <tr>
+                  <td> Moderate thinness </td>
+                  <td> 16.00 to 16.99 </td>
+                </tr>
+                <tr>
+                  <td>Mild thinness  </td>
+                  <td> 17.00 to 18.49 </td>
+                </tr>
+                <tr>
+                  <td>Normal Range  </td>
+                  <td>18.50 to 24.99  </td>
+                </tr>
+                <tr>
+                  <td>Pre Obese  </td>
+                  <td> 25.00 to 29.99 </td>
+                </tr>
+                <tr>
+                  <td> Obese class I </td>
+                  <td>30.00 to 34.99 </td>
+                </tr>
+                <tr>
+                  <td>Obese class II  </td>
+                  <td> 35.00 to 39.99 </td>
+                </tr>
+                <tr>
+                  <td>Obese class III  </td>
+                  <td> > 40 </td>
+                </tr>
+
+              </table>
+
+            </div>
+
+            <div class="details">
+
+
+
+         </div>
+
+  </div>
+  <div class="container2" >
+
+    <div class="head"> <h2> Calorie Calculations</h2> </div>
+
+    <div class="workout">
+
+      <select [(ngModel)]="selectedValue">
+        <optgroup>
+        <option value="1">Sedentary: Little or no exercise</option>
+        <option value="2">Light: Exercise 1-3 times/week</option>
+        <option value="3">Moderate: Exercise 4-5 times/week</option>
+        <option value="4">Active: Daily exercise or intense exercise 3-4 times/week</option>
+        <option value="5">Very Active: Intense exercise 6-7 times/week </option>
+        <option value="6">Extra Active: very intense exercise daily or Physical job</option>
+        </optgroup>
+      </select>
+
+    </div>
+        <div class="sheet">
+           <table *ngIf="selectedValue != null" id="customers">
+             <tr>
+               <th>Type of Weight Loss</th>
+               <th>Calories Required</th>
+             </tr>
+              <tr>
+                <td> Maintain Weight:</td>
+                <td> {{(bmr * bmrWorkout[selectedValue].bmr).toFixed(0) }}</td>
+              </tr>
+             <tr>
+               <td> Mild weight loss
+                 0.5 lb/week :</td>
+               <td> {{((bmr*bmrWorkout[selectedValue].bmr) * ( 1 - bmrWorkout[selectedValue].per)).toFixed(0)}} </td>
+             </tr>
+             <tr>
+               <td>Weight loss
+                 1 lb/week:
+                 <i style="color: #1fd302">(Recommended)</i></td>
+               <td> {{((bmr*bmrWorkout[selectedValue].bmr) * ( 1 - (bmrWorkout[selectedValue].per*2))).toFixed(0)}} </td>
+             </tr>
+             <tr>
+               <td> High weight loss
+                 1.5 lb/week:</td>
+               <td> {{((bmr*bmrWorkout[selectedValue].bmr) * ( 1 - (bmrWorkout[selectedValue].per*3))).toFixed(0)}} </td>
+             </tr>
+             <tr>
+               <td> Extreme weight loss
+                 2 lb/week:
+                 <i style="color: orangered">(Proper Care required)</i>
+               </td>
+               <td> {{((bmr*bmrWorkout[selectedValue].bmr) * ( 1 - (bmrWorkout[selectedValue].per*4))).toFixed(0)}} </td>
+             </tr>
+
+
+           </table>
+        </div>
+
+        <div class="zig-zag group" *ngIf="selectedValue != null" >
+
+        <div class="head"><h2>Zig Zag Diet</h2> </div>
+        <div class="diet1">
+        <h3>Schedule 1</h3>
+        <table  *ngIf="selectedValue != null" id="customers">
+          <tr>
+            <th>Day  </th>
+            <th>Mild Weight loss  </th>
+            <th>Weight loss (Safe)  </th>
+            <th>Extreme Weight loss (Risky)</th>
+          </tr>
+          <tr>
+            <td>Sunday  </td>
+            <td>{{(bmr * bmrWorkout[selectedValue].bmr).toFixed(0)}}  </td>
+            <td>{{(bmr * bmrWorkout[selectedValue].bmr).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr * 0.93)).toFixed(0) }}  </td>
+          </tr>
+          <tr>
+            <td>Monday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -350).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-700).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)*0.53).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Tuesday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -350).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-700).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)*0.53).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Wednesday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -350).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-700).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)*0.53).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Thursday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -350).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-700).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)*0.53).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Friday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -350).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-700).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)*0.53).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Saturday  </td>
+            <td>{{(bmr * bmrWorkout[selectedValue].bmr).toFixed(0)}}  </td>
+            <td>{{(bmr * bmrWorkout[selectedValue].bmr).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr * 0.93)).toFixed(0) }}  </td>
+          </tr>
+
+
+        </table>
+      </div>
+
+      <div class="diet2">
+        <h3>Schedule 2</h3>
+        <table  *ngIf="selectedValue != null" id="customers">
+          <tr>
+            <th>Day  </th>
+            <th>Mild Weight loss  </th>
+            <th>Weight loss (Safe)  </th>
+            <th>Extreme Weight loss (Risky)</th>
+          </tr>
+          <tr>
+            <td>Sunday  </td>
+            <td>{{(bmr * bmrWorkout[selectedValue].bmr -500).toFixed(0)}}  </td>
+            <td>{{(bmr * bmrWorkout[selectedValue].bmr - 1000).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr - 1322)).toFixed(0) }}  </td>
+          </tr>
+          <tr>
+            <td>Monday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -333).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-667).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -1107).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Tuesday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -167).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-333).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -839).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Wednesday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) ).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -678).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Thursday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -83).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-167).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-780).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Friday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -250).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-500).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -1000).toFixed(0)}}  </td>
+          </tr>
+          <tr>
+            <td>Saturday  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr) -417).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr)-833).toFixed(0)}}  </td>
+            <td>{{((bmr * bmrWorkout[selectedValue].bmr )-1215).toFixed(0) }}  </td>
+          </tr>
+
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

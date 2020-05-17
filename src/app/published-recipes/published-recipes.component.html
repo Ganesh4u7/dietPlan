@@ -1,0 +1,101 @@
+<div class="total-container">
+  <app-nav-bar ></app-nav-bar>
+  <!--<div id="plan-menu">-->
+    <!--<div class="item-type1 dietPlan" [ngClass]="{'active1': planSelectedButton == 'yourDietPlans'}">-->
+      <!--<a  style=" margin-right: 8px;" (click)="hide(0)" >Recipes</a>-->
+    <!--</div>-->
+    <!--<div class="item-type1 wokoutPlan" [ngClass]="{'active1': planSelectedButton == 'yourWorkoutPlans'}" >-->
+      <!--<a   (click)="hide(1)">Workout Plans</a>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="main-container" >
+    <div class="head" id="plan1">
+      <h2 style="text-align: center; margin-top: 30px;
+     margin-bottom: 30px;">Recipes</h2>
+    </div>
+    <div class="container" id="plan11" >
+      <div class="space"></div>
+      <div class="message" *ngFor="let items of plans;let i = index " >
+        <div class="message-outline">
+          <button type="button" class="collapsible" (click)=" showPlan(i)">
+            <p>Publisher Name :{{items.creatorName}}<i *ngIf="items.creatorName == username"> (You)</i>   <i  style="float: right;color: #006600; margin-left: 10px; padding: 8px; background: white ">{{plans[i].upvotes.length}} Upvotes</i></p>
+            <p>Plan Name: &nbsp; {{plans[i].nameTags.nameTag}} </p>
+
+
+
+            <p style="float: right"> Date: {{plans[i].nameTags.date.slice(0,10)+" "+plans[i].nameTags.date.slice(12,19)}}</p></button>
+          <div class="content">
+            <div class="tableContent">
+
+              <table style="width:100%;">
+                <tr>
+                  <th>Item Name</th>
+                  <th>(gms/ml)</th>
+                  <th>KCal</th>
+                  <th>Protein</th>
+                  <th>Carbs</th>
+                  <th>Fat</th>
+                  <th >S Fat</th>
+                  <th >D Fiber</th>
+                  <th>Sugar</th>
+                  <th>Sodium</th>
+                </tr>
+                <tr *ngFor="let item of plans[i].plan;let j = index ;">
+                  <td>{{item.name}}</td>
+                  <td>{{item.sWeight}}</td>
+                  <td>{{(item.sWeight*item.kcal).toFixed(2)}}</td>
+                  <td>{{(item.sWeight*item.protein).toFixed(2)}}</td>
+                  <td>{{(item.sWeight*item.carbs).toFixed(2)}}</td>
+                  <td>{{(item.sWeight*item.fat).toFixed(2)}}</td>
+                  <td>{{(item.sWeight*item.sfat).toFixed(2)}}</td>
+                  <td>{{(item.sWeight*item.DFib).toFixed(2)}}</td>
+                  <td>{{(item.sWeight*item.sugar).toFixed(2)}}</td>
+                  <td>{{(item.sWeight*item.sodium).toFixed(2)}}</td>
+                </tr>
+
+                <tr>
+                  <th> Total: </th>
+                  <td>  {{(plans[i].totals.weight)}}</td>
+                  <td> {{(plans[i].totals.kcal).toFixed(2)}}</td>
+                  <td>{{(plans[i].totals.protein).toFixed(2)}}</td>
+                  <td>{{(plans[i].totals.carbs).toFixed(2)}}</td>
+                  <td>{{(plans[i].totals.fat).toFixed(2)}}</td>
+                  <td>{{(plans[i].totals.sfat).toFixed(2)}}</td>
+                  <td >{{(plans[i].totals.DFib).toFixed(2)}}</td>
+                  <td>{{(plans[i].totals.sugar).toFixed(2)}}</td>
+                  <td>{{(plans[i].totals.sodium).toFixed(2)}}</td>
+                </tr>
+              </table>
+            </div>
+            <div >
+              <p style="font-weight: bold">Recipe</p>
+              <p>{{plans[i].nameTags.recipe}}</p>
+            </div>
+         <div *ngIf="username != plans[i].creatorName">
+              <div class="upvote" *ngIf="plans[i].upvoteCheck == false; ">
+                <a (click)="sendUpvote(plans[i]._id,i)"><i class="far fa-thumbs-up" style=" font-size: 24px; " ></i> Upvote</a>
+              </div>
+           <div class="upvote1" *ngIf="plans[i].upvoteCheck == true; ">
+             <a (click)="sendUpvote(plans[i]._id,i)"> Upvoted</a>
+           </div>
+
+
+
+
+            <button type="button" class="btn btn-primary deleteButton"  style="float: right" (click)="addPlan(i)" *ngIf="savedPublishPlanMessages[i]==false">Add to My Plans</button>
+           <button type="button" class="btn btn-success deleteButton"  style="float: right"  *ngIf="savedPublishPlanMessages[i]==true">Plan Saved</button>
+         </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<app-view-workout-plans id="plan2"></app-view-workout-plans>-->
+
+  </div>
+
+
+
+
+
+</div>

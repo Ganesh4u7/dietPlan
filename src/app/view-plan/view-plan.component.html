@@ -1,0 +1,100 @@
+<div class="total-container">
+<app-nav-bar ></app-nav-bar>
+  <div id="plan-menu">
+    <div class="item-type1 dietPlan" [ngClass]="{'active1': planSelectedButton == 'yourDietPlans'}" (click)="hide(0)">
+      <a  style=" margin-right: 8px;"  >Your Diet Plans</a>
+    </div>
+    <div class="item-type1 wokoutPlan" [ngClass]="{'active1': planSelectedButton == 'yourWorkoutPlans'}" (click)="hide(1)">
+      <a   >Your Workout Plans</a>
+    </div>
+</div>
+<div class="main-container" >
+  <div class="head" id="plan1">
+    <h2 style="text-align: center; margin-top: 30px;
+     margin-bottom: 30px;">Your Diet Plans</h2>
+  </div>
+  <div class="container" id="plan11" >
+
+    <div class="message" *ngFor="let items of savedPlansArray;let i = index " >
+      <div class="message-outline">
+        <button type="button" class="collapsible" (click)=" showPlan(i)"><p>Plan Name: &nbsp; {{savedPlansNametags[i].nameTag}}
+        </p>
+          <div *ngIf="savedPlansNametags[i].editPlanName == 0;else edit" ><button class="btn-success" (click)="editName(1,i)">Edit Name</button> </div>
+          <ng-template #edit>
+           <button class="btn-danger" (click)="editName(0,i)">X</button> <input  id="changePlanName" type="text" style="width: 20%;margin-left: 10px" #changedName (click)="changePlanName(i)"><button class="btn-success" (click)="saveName(i,changedName.value)" style="margin-left: 20px">Save Name</button>
+          </ng-template>
+          <p style="float: right"> Date: {{savedPlansNametags[i].date.slice(0,10)+" "+savedPlansNametags[i].date.slice(12,19)}}</p></button>
+        <div class="content">
+          <div class="tableContent"   >
+            <!--<p style="float: left"> {{item.name}}</p>-->
+            <!--<p style="float: right">KCal:{{(item.sWeight*item.kcal).toFixed(2)}} Protein:{{(item.sWeight*item.protein).toFixed(2)}}-->
+            <!--Carbs{{(item.sWeight*item.carbs).toFixed(2)}} Fat:{{(item.sWeight*item.fat).toFixed(2)}}</p>-->
+
+            <table id="plansTable" style="width:100%;">
+              <tr>
+                <th>Item Name</th>
+                <th>(gms/ml)</th>
+                <th>KCal</th>
+                <th>Protein</th>
+                <th>Carbs</th>
+                <th>Fat</th>
+                <th>S Fat</th>
+                <th>D Fiber</th>
+                <th>Sugar</th>
+                <th>Sodium</th>
+
+              </tr>
+              <tr *ngFor="let item of savedPlansArray[i];let j = index ;">
+                <td>{{item.name}}</td>
+                <td>{{item.sWeight}}</td>
+                <td>{{(item.sWeight*item.kcal).toFixed(2)}}</td>
+                <td>{{(item.sWeight*item.protein).toFixed(2)}}</td>
+                <td>{{(item.sWeight*item.carbs).toFixed(2)}}</td>
+                <td>{{(item.sWeight*item.fat).toFixed(2)}}</td>
+                <td>{{(item.sWeight*item.sfat).toFixed(2)}}</td>
+                <td>{{(item.sWeight*item.DFib).toFixed(2)}}</td>
+                <td>{{(item.sWeight*item.sugar).toFixed(2)}}</td>
+                <td>{{(item.sWeight*item.sodium).toFixed(2)}}</td>
+
+              </tr>
+
+              <tr>
+                <th> Total: </th>
+                <td>  {{(savedPlansTotals[i].weight)}}</td>
+                <td> {{(savedPlansTotals[i].kcal).toFixed(2)}}</td>
+                <td>{{(savedPlansTotals[i].protein).toFixed(2)}}</td>
+                <td>{{(savedPlansTotals[i].carbs).toFixed(2)}}</td>
+                <td>{{(savedPlansTotals[i].fat).toFixed(2)}}</td>
+                <td>{{(savedPlansTotals[i].sfat).toFixed(2)}}</td>
+                <td>{{(savedPlansTotals[i].DFib).toFixed(2)}}</td>
+                <td>{{(savedPlansTotals[i].sugar).toFixed(2)}}</td>
+                <td>{{(savedPlansTotals[i].sodium).toFixed(2)}}</td>
+
+              </tr>
+            </table>
+          </div>
+          <div *ngIf="savedPlansNametags[i].editMode == 0; else viewRecipe">
+            <p style="font-weight: bold">Add Recipe Details</p>
+            <textarea rows="5" cols="50" #recipe></textarea>
+            <button class="btn btn-success" (click)="saveRecipe(i,recipe.value)">Save Recipe</button>
+          </div>
+          <ng-template #viewRecipe>
+            <p style="color:firebrick;font-weight:bold;">Recipe</p>
+            <p style="color: #006600">{{savedPlansNametags[i].recipe}}</p>
+          </ng-template>
+         <button type="button" class="btn btn-primary publishButton" style="float: left" *ngIf="savedPlansNametags[i].publish == false" (click)="publishPlan(i)" [disabled]="savedPlansNametags[i].editMode == 0">Publish Plan</button>
+          <button type="button" class="btn btn-danger deleteButton"  style="float: right" (click)="deletePlan(i)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-view-workout-plans id="plan2"></app-view-workout-plans>
+
+</div>
+
+
+
+
+
+</div>

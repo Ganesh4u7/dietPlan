@@ -1,0 +1,105 @@
+
+<app-nav-bar></app-nav-bar>
+<div class="main-container">
+<div class="head" > <h2 style="text-align: center; margin-top: 20px;
+     margin-bottom: 20px;">Settings</h2></div>
+
+<div class="signup">
+  <form  [formGroup]="userSettings" (ngSubmit)="onUserSettings()" >
+
+    <fieldset>
+      <div>
+        <h2> Change user details</h2>
+
+        <div class="gender form-group group radio-btns " style="margin-left: 8px" >
+          <label class="radio inline" style="margin-right: 5px;" >Gender:</label>
+
+
+          <input type="radio" id="liq" name="gender" value="male"  formControlName="gender">
+          <label for="liq">Male</label>
+          <input type="radio" id="nut" name="gender" value="female"  formControlName="gender">
+          <label for="nut">Female</label>
+
+          <span class="text-muted" style="color: red;" *ngIf="!userSettings.controls['gender'].valid && userSettings.controls['gender']?.touched"> Please select Gender.</span>
+        </div>
+        <div class="dob form-group">
+          <label style="margin-right: 10px; margin-left: 8px;">Date of Birth:</label>
+          <input type="date" name="dob" formControlName="dob" required>
+          <span class="text-muted" style="color: red;" *ngIf="!userSettings.controls['dob'].valid && userSettings.controls['dob']?.touched"> Please select DOB.</span>
+        </div>
+
+      </div>
+      <div class="weight form-group">
+        <input type="text" id="weight" class="form-control input-lg" placeholder="weight"
+               formControlName="weight"
+
+               required
+        >
+      </div>
+      <div class=" height form-group">
+        <input type="text" id="feet" class="form-control input-lg" placeholder="feet"
+               formControlName="feet"
+
+               required
+        >
+        <input type="text" id="inch" class="form-control input-lg" placeholder="inches"
+               formControlName="inch"
+
+               required
+        >
+      </div>
+
+      <div>
+        <button type="submit" style="margin-top: 20px" class="btn btn-success" [disabled]="!userSettings.valid"> Submit</button>
+      </div>
+      <p style="text-align: center;color: #1fd302" *ngIf="settingsSaved == 1">Settings Saved</p>
+
+    </fieldset>
+  </form>
+
+
+</div>
+
+  <div class="login">
+    <form  [formGroup]="passwordForm" (ngSubmit)="onChangePwd()" >
+
+      <fieldset>
+        <div>
+
+          <h2 class=" pull-center">Change Password</h2>
+
+
+          <div class="form-group">
+            <input type="password" id="password" class="form-control input-lg" placeholder="Password"
+                   formControlName="pwd"
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+
+                   required
+            >
+            <span class="text-muted" style="color: red;" *ngIf="!passwordForm.controls['pwd'].valid && passwordForm.controls['pwd']?.touched"> Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</span>
+
+          </div>
+          <div class="form-group">
+            <input type="password"  id="password2" class="form-control input-lg" placeholder="Confirm Password"
+                   formControlName="cpwd"
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+
+                   required
+            >
+            <span id='message'></span>
+            <span class="text-muted" style="color: red;" *ngIf="passCheck != null"> {{passCheck}}</span>
+          </div>
+
+        <div>
+          <button type="submit" class="btn btn-success" [disabled]="!passwordForm.valid"> Submit</button>
+        </div>
+          <p style="text-align: center;color: #1fd302" *ngIf="pwdSaved == 1">Password Saved</p>
+        </div>
+       </fieldset>
+    </form>
+
+
+  </div>
+
+
+</div>

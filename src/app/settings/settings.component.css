@@ -1,0 +1,88 @@
+.main-container{
+  height: 100vh;
+  margin-top: 30px;
+  margin-left: 10%;
+}
+
+.head{
+  width: 90%;
+  font-family:"Great Vibes",cursive;
+  background: white;
+  margin-top: 30px;
+  padding: 10px 0;
+}
+.head h2{
+  font-size: 60px;
+  color: #008000;
+  text-align: center;
+}
+
+
+.signup{
+  width: 40%;
+  float: left;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 40px;
+  background: white;
+}
+
+.signup h2{
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.signup .weight input{
+  width: 50%;
+}
+.signup .height input{
+  width: 40%;
+  margin-right: 10px;
+  float: left;
+}
+.signup .gender input{
+  margin-left: 4px;
+}
+.signup .gender label{
+  margin-left: 2px;
+}
+
+
+
+.login{
+
+  width: 40%;
+  float: right;
+  margin-right: 10%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 40px;
+  background: white;
+}
+
+.login h2{
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+@media screen and (max-width: 480px) {
+  .main-container{
+    height: 100%;
+  }
+  .signup{
+    width: 90%;
+    margin-right: 10%;
+    float: none;
+  }
+  .signup h2{
+    font-size: 20px;
+  }
+  .login{
+    width: 90%;
+    margin-right: 10%;
+    float: none;
+  }
+  .login h2{
+    font-size: 20px;
+  }
+}

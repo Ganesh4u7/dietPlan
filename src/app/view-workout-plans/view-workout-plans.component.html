@@ -1,0 +1,57 @@
+
+<div class="main-container">
+  <div class="head">
+    <h2 style="text-align: center; margin-top: 30px;
+     margin-bottom: 30px;">Your Workout Plans</h2>
+  </div>
+  <div class="container">
+
+    <div class="message" *ngFor="let items of savedWorkoutPlansArray;let i = index ">
+      <div class="message-outline">
+        <button type="button" class="collapsible" (click)=" showPlan1(i)"><p>Plan Name: &nbsp; {{savedWorkoutPlansNametags[i].nameTag}}
+        </p>
+          <div *ngIf="savedWorkoutPlansNametags[i].editPlanName == 0;else edit1" ><button class="btn-success" (click)="editName1(1,i)">Edit Name</button> </div>
+          <ng-template #edit1>
+            <button class="btn-danger" (click)="editName1(0,i)">X</button>   <input  type="text" style="width: 20%;margin-left: 10px;" #changedName1><button class="btn-success" style="margin-left: 20px;" (click)="saveName1(i,changedName1.value)">Save Name</button>
+          </ng-template>
+          <p style="float: right"> Date: {{savedWorkoutPlansNametags[i].date.slice(0,10)+" "+savedWorkoutPlansNametags[i].date.slice(12,19)}}</p></button>
+        <div class="content1">
+          <div >
+            <!--<p style="float: left"> {{item.name}}</p>-->
+            <!--<p style="float: right">KCal:{{(item.sWeight*item.kcal).toFixed(2)}} Protein:{{(item.sWeight*item.protein).toFixed(2)}}-->
+            <!--Carbs{{(item.sWeight*item.carbs).toFixed(2)}} Fat:{{(item.sWeight*item.fat).toFixed(2)}}</p>-->
+
+            <table style="width:100%;">
+              <tr>
+                <th>Exercise Name</th>
+                <th style="width: 35%">Description</th>
+                <th>Mins</th>
+                <th>Calories Burnt</th>
+
+              </tr>
+              <tr *ngFor="let item of savedWorkoutPlansArray[i];let j = index ;">
+                <td>{{item.name}}</td>
+                <td style="width: 35%">{{item.description}}</td>
+                <td>{{item.mins}}</td>
+                <td>{{(item.mins*3.5*(item.met*personWeight/200)).toFixed(2)}}</td>
+
+              </tr>
+
+              <tr>
+
+                <td>  </td>
+                <th> Total: </th>
+                <td> {{savedWorkoutPlansTotals[i].mins}}</td>
+                <td>{{(savedWorkoutPlansTotals[i].calories).toFixed(2)}}</td>
+
+              </tr>
+            </table>
+          </div>
+
+
+          <button type="button" class="btn btn-danger deleteButton"  style="float: right;margin-top: 12px" (click)="deletePlan1(i)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.main-container{
+  min-height: 100vh;
+  max-height: 100%;
+}
+
+.head{
+  width: 90%;
+  font-family:"Great Vibes",cursive;
+  background: white;
+  padding: 10px 0;
+  margin-left: 5%;
+  box-sizing: border-box;
+}
+.head h2{
+  font-size: 60px;
+  color: #008000;
+  text-align: center;
+}
+
+.container{
+  width: 90%;
+  padding: 30px;
+  background: white;
+  margin-top: 50px;
+
+}
+
+.conatiner .names{
+  width: 100%;
+}
+.container .name1{
+  width: 28%;
+  float: left;
+  margin-right: 30px;
+}
+
+.container .itemType{
+  width: 100%;
+}
+
+.container .values{
+  width: 100%;
+}
+.container .nutrient{
+  width: 15%;
+  float: left;
+  margin-right: 10px;
+}
+
+.saveItem{
+  width: 100%;
+}

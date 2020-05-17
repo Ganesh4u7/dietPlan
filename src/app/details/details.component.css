@@ -1,0 +1,226 @@
+.main-container{
+  height: 100%;
+}
+.head {
+  margin: 16px 8px;
+  background-color: white;
+  padding: 5px;
+}
+.head h2{
+  font-family:"Great Vibes",cursive;
+  font-size: 36px;
+  color: #008000;
+}
+.container1{
+  background: white;
+  margin: 8px;
+  padding: 20px;
+  text-align: center;
+}
+.container2{
+  min-height: 300px;
+  background: white;
+  margin: 8px;
+  padding: 20px;
+  text-align: center;
+}
+@media screen and (min-width: 375px){
+  .head h2{
+    font-size: 40px;
+  }
+}
+@media screen and (min-width: 425px){
+  .head h2{
+    font-size: 46px;
+  }
+}
+@media screen and (min-width: 768px){
+  .head {
+    margin: 16px;
+  }
+  .head h2{
+    font-size: 50px;
+  }
+  .container1{
+    margin: 16px;
+  }
+  .container2{
+    margin: 16px;
+  }
+  .bmiInfo{
+    width: 45%;
+  }
+}
+@media screen and (min-width: 1024px){
+  .head {
+    margin: 16px 48px;
+  }
+  .container1{
+    margin: 16px 48px;
+  }
+  .container2{
+    margin: 16px 48px;
+  }
+}
+
+
+
+
+
+
+
+.container1 h2{
+   text-align: center;
+ }
+
+.container2 h2{
+  text-align: center;
+}
+.chart{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.container2 .sheet #customers{
+  width: 70%;
+}
+.container2 .zig-zag{
+  margin-left: 30px;
+}
+.container2 .zig-zag .diet1{
+  width: 45%;
+  float: left;
+}
+.container2 .zig-zag .diet2{
+
+}
+
+.container2 .zig-zag .diet1 #customers{
+
+  float: left;
+  margin-right: 30px;
+}
+.container2 .zig-zag .diet2 #customers{
+  width: 40%;
+}
+
+
+.details {
+  width: 30%;
+}
+.bmiInfo{
+  display: inline-block;
+  width: 100%;
+}
+@media screen and (min-width: 768px){
+  .bmiInfo{
+    width: 45%;
+  }
+}
+.details p{
+  font-weight: bold;
+}
+.raphael-group-49-dataset-top-label text{
+  display: none;
+}
+
+.raphael-group-sjvcNLsB{
+  display: none;
+}
+
+
+.workout{
+  margin-top: 30px;
+}
+.sheet{
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+@media screen and (max-width: 1020px){
+
+}
+
+@media screen and (max-width: 720px) {
+
+}
+
+@media screen and (max-width: 420px) {
+
+.container1 .details{
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+  .container1 h2{
+
+      font-size: 23px;
+      margin-bottom: 34px;
+
+  }
+
+.container2 .workout select{
+  width: 90%;
+}
+  optgroup option{
+    font-size: 16px;
+  }
+
+  .container2 .zig-zag  .diet1{
+    width: 80%;margin-right: 30px;
+    z-index: 999;
+  }
+  .container2 .zig-zag .diet2{
+    width: 80%;
+    margin: unset;
+    z-index: 999;
+  }
+  .container2 .zig-zag .diet1 #customers{
+
+  }
+  .container2 .zig-zag{
+    margin-left: 0px;
+  }
+  .container2 .zig-zag .diet1 table #customers {
+    width: 80%;
+  }
+  .container2 .sheet #customers{
+    margin-left: 0;
+    width: 100%;
+    z-index: 999999;
+  }
+  .container2 .zig-zag .diet1 #customers{
+
+    margin-bottom: 30px;
+  }
+  .container2 .zig-zag h3{
+    margin-left: 55px;
+  }
+}
+
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+
+}
+.sheet #customers{
+  margin-left: 15%;
+}

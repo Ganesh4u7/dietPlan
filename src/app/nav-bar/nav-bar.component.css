@@ -1,0 +1,137 @@
+/*.navigation-bar{*/
+  /*height: 10vh;*/
+  /*width: 100%;*/
+  /*background: green;*/
+/*}*/
+/*.nav-button{*/
+  /*margin-left: 50px;*/
+/*}*/
+/*.nav-button a{*/
+  /*font-weight: bold;*/
+  /*float: left;*/
+  /*color: green;*/
+  /*padding: 8px;*/
+/*margin-top: 8px;*/
+  /*margin-right: 10px;*/
+ /*border: 2px solid yellowgreen;*/
+  /*border-radius: 10px;*/
+  /*background: white;*/
+
+
+/*}*/
+
+/*.nav-signout a{*/
+  /*font-weight: bold;*/
+  /*float: right;*/
+  /*color: green;*/
+  /*padding: 8px;*/
+  /*margin-top: 8px;*/
+  /*margin-right: 10px;*/
+  /*border: 2px solid yellowgreen;*/
+  /*background: white;*/
+/*}*/
+
+
+/*@media screen and (max-width: 480px){*/
+
+  /*.nav-button{*/
+    /*margin-left: 15px;*/
+  /*}*/
+  /*.nav-button a{*/
+    /*padding: 6px;*/
+  /*}*/
+  /*.nav-signout a{*/
+    /*padding: 6px;*/
+    /*margin-right: 5px;*/
+  /*}*/
+/*}*/
+
+
+/*new menu*/
+
+
+nav{
+  width: 100%;
+  background: green;
+
+  z-index: 99999;
+
+}
+ul{
+  margin: 0 auto;
+  padding: 0;
+}
+
+ul li{
+  list-style: none;
+  display: inline-block;
+  padding: 20px;
+}
+
+
+ul li a:hover{
+  background: #1fd302;
+}
+ul li a{
+  color: #006600;
+  background: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px;
+  border: 2px yellowgreen solid;
+  border-radius: 5px;
+}
+
+
+
+.toggle{
+  width: 100%;
+  padding: 10px 20px;
+  background: #006600;
+  text-align: right;
+  box-sizing: border-box;
+  color: white;
+  font-size: 30px;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .toggle{
+    display: block;
+  }
+  ul{
+    width: 100%;
+  }
+  ul li{
+    display: block;
+    text-align: center;
+  }
+  #items{
+    display: none;
+  }
+  ul li a{
+    color: white;
+    background: none;
+    text-decoration: none;
+    padding: 0;
+    border: 0;
+  }
+  ul li:hover{
+    background: #1fd302;
+  }
+}
+
+
+.group{
+  width: 100%;
+  text-align: center;
+}
+.group:before,
+.group:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.group:after {
+  clear: both;
+}

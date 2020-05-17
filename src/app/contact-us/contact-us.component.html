@@ -1,0 +1,38 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="main-container">
+
+  <div class="head">
+     <h2 style="text-align: center; margin-top: 20px;
+     margin-bottom: 20px;">Contact us</h2>
+  </div>
+
+  <div class="container">
+
+
+
+    <div class="leave-a-message">
+      <p>Please give us any suggestions to help build this app further or leave us a message if you have any queries.</p>
+      <form [formGroup]="messageForm" (ngSubmit)="onSubmitMessage()">
+      <div class="fields">
+
+        <div class="form-group">
+          <input type="text" id="subject" class="form-control input-lg"
+                 placeholder="subject"
+                 formControlName="subject"
+          >
+        </div>
+
+          <div class="message">
+          <label>Message:</label>
+          <textarea  id="message" class="form-control input-lg"formControlName="message"></textarea>
+          </div>
+        </div>
+        <button class="btn btn-success" style="margin-top: 10px" type="submit">Send Message</button>
+      </form>
+      <p style="color:#1fd302; text-align: center" *ngIf="messageSent == true"> Your Message has been Sent</p>
+      <p class="mail"><i class="far fa-envelope" style="color: #d80000;"></i> Knowyourcaloriess@gmail.com</p>
+    </div>
+  </div>
+
+</div>

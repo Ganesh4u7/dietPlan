@@ -1,0 +1,512 @@
+.head {
+  margin: 16px 8px;
+  background-color: white;
+  padding: 5px;
+}
+.head h2{
+  font-family:"Great Vibes",cursive;
+  font-size: 30px;
+  color: #008000;
+}
+
+
+.plan-menu{
+  margin-top: 10px;
+  height: 50px;
+}
+
+#hide{
+  display: none;
+}
+nav{
+  margin-top: -10px;
+}
+::-webkit-scrollbar {
+  height: 0px;
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+h2{
+  /* font-family:"Great Vibes",cursive; */
+  font-size: 35px;
+  color: #008000;
+}
+
+
+@media screen and (min-width: 375px){
+  #plan-menu a{
+    font-size: 16px;
+    width: auto;
+  }
+  .head h2{
+    font-size: 34px;
+  }
+}
+@media screen and (min-width: 425px){
+  .head h2{
+    font-size: 40px;
+  }
+}
+@media screen and (min-width: 768px){
+  .head {
+    margin: 16px;
+  }
+  .head h2{
+    font-size: 50px;
+  }
+}
+@media screen and (min-width: 1024px){
+  .head {
+    margin: 16px 48px;
+  }
+}
+
+.example-container {
+  width: 45%;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  overflow: auto;
+}
+
+.example-container h2{
+  font-family: inherit;
+}
+.container{
+  margin-top: 20px;
+  float: left;
+}
+
+.example-list {
+  border: solid 2px #008000;
+  min-height: 150px;
+  max-height: 512px;
+  background: #008000;
+  border-radius: 4px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+
+}
+
+
+.example-box {
+  padding: 4px 8px 8px 8px;
+  border-bottom: solid 2px #008000;
+  color: rgba(0, 0, 0, 0.87);
+  display: block;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 13px;
+  color: #008000;
+  text-align: center;
+  width: 100%;
+}
+input[type=text]{
+  width: 20%;
+}
+input[type=radio]{
+  width: 5%;
+}
+
+
+
+.arrows{
+  width: 3%;
+  margin-top: 20%;
+  margin-left: 10px;
+}
+.arrowsMobile{
+margin-left: 38%;
+  margin-top: 10%;
+  float: left;
+}
+.arrowsMobile a{
+margin-left: 10px;
+
+}
+
+.show{
+  display: none;
+}
+
+.group{
+  width: 100%;
+  text-align: center;
+}
+.group:before,
+.group:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.group:after {
+  clear: both;
+}
+
+
+
+@media  screen and (max-width:720px)   {
+  .example-container{
+    width: 90%;
+  }
+  .hide{
+    display: none;
+  }
+  .show{
+    display: block;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    /*box-shadow: inset 0 0 5px grey;*/
+    /*border-radius: 10px;*/
+    background: white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #006600;
+    width: 15px;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #006600;
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+@media screen and (max-width: 480px) {
+  h2{
+    font-size: 24px;
+  }
+  .example-container{
+    margin: 5%;
+  }
+  .hide{
+    display: none;
+  }
+  .show{
+    display: block;
+  }
+  .box-2 .example-box input{
+    width: 70%;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    /*box-shadow: inset 0 0 5px grey;*/
+    /*border-radius: 10px;*/
+    background: white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #006600;
+    width: 10px;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #006600;
+  }
+
+}
+@media screen and (max-width: 1024px){
+  .arrows{
+    margin-right: 10px;
+  }
+}
+/* Main container */
+#main-container{
+  margin: 8px;
+  margin-bottom: 0px;
+  background-color: white;
+  padding: 8px;
+}
+#box-1{
+  width: 100%;
+  padding-top: 8px;
+}
+#box-2{
+  margin: 16px 0px;
+  width: 100%;
+}
+#arrows-mobile{
+  text-align: center;
+}
+#arrows-desktop{
+  display: none;
+}
+#box-3{
+  width: 100%;
+}
+@media screen and (min-width: 768px){
+  #main-container{
+    padding: 16px;
+    margin: 16px;
+    margin-bottom: 0px;
+  }
+  #box-1{
+    width: calc(48% - 8px);
+    margin-right: 8px;
+    display: inline-block;
+    padding: 0px;
+    vertical-align: top;
+  }
+  #box-2{
+    width: 4%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  #box-3{
+    width: calc(48% - 8px);
+    margin-left: 8px;
+    display: inline-block;
+    vertical-align: top;
+  }
+  #choosen-items{
+    margin-top: 74px !important;
+  }
+  #arrows-mobile{
+    display: none;
+  }
+  #arrows-desktop{
+    margin: 289.5px 0px !important;
+    text-align: center;
+    display: block;
+  }
+}
+@media screen and (min-width: 1024px){
+  #main-container{
+    margin: 48px;
+    margin-bottom: 0px;
+  }
+}
+
+/* box-1 div css*/
+.seperator{
+  background-color: #008000;
+  height: 1px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+#items-menu1{
+
+  width: 100%;
+  margin: 16px 0px;
+}
+#items-menu1 .right-scroll{
+  margin-left: 10px;
+}
+#items-menu1 .left-scroll{
+  margin-left: 20px;
+}
+
+#item-types-container1{
+  width: 80%;
+  margin-left: 10px;
+  margin-bottom: 13px;
+  white-space: nowrap;
+  overflow: auto;
+  float: left;
+
+}
+.item-type{
+  text-align: center;
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid green;
+  border-radius: 8px;
+  margin-right: 8px;
+  color: green;
+  cursor: pointer;
+}
+.item-type a{
+  text-decoration: none;
+}
+.selected{
+  /* Apply this usig ngClass to current active item */
+  background-color: green;
+  color: white;
+}
+.drag-item{
+  width: 100%;
+}
+.item-image{
+  padding: 4px 0px;
+  text-align: center;
+  height: 56px;
+  width: 56px;
+  display: inline-block;
+  /* background-color: red; */
+  vertical-align: top;
+}
+.item-image img{
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  /* border: 1px solid green; */
+}
+.item-title{
+  width: calc(100% - 56px);
+  padding: 8px;
+  padding-top: 0px;
+  vertical-align: top;
+  /* background-color: burlywood; */
+  display: inline-block;
+}
+.title-text-1{
+  text-align: justify;
+  font-size: 18px;
+  color: green;
+  margin: 0px;
+}
+.title-text-2{
+  text-align: justify;
+  font-size: 14px;
+  color: green;
+  margin: 0px;
+}
+.protein-box{
+  width: 38%;
+  display: inline-block;
+  text-align: left;
+}
+.carbs-box{
+  width: 35%;
+  display: inline-block;
+  text-align: left;
+}
+.fat-box{
+  width: 27%;
+  display: inline-block;
+  text-align: left;
+}
+
+
+@media screen and (max-width: 320px){
+  .mobile{
+    display: block;
+  }
+  .desktop{
+    display: none !important;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    /*box-shadow: inset 0 0 5px grey;*/
+    /*border-radius: 10px;*/
+    background: white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #006600;
+    width: 10px;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #006600;
+  }
+}
+@media screen and (min-width: 768px){
+
+  .mobile{
+    display: none !important;
+  }
+  .desktop{
+    display: block !important;
+  }
+}
+
+/* box-3 css*/
+#choosen-items{
+  min-height: 230px;
+  margin: 0px;
+}
+#quantity-edit-container{
+  margin-top: 8px;
+  width: 100%;
+  text-align: left;
+}
+#quantity-edit-container input{
+  width: 64px;
+  display: inline-block;
+}
+#quantity-edit-container button{
+  margin-left: 16px;
+  vertical-align: top;
+  display: inline-block;
+}
+#total-container{
+  width: 100%;
+  margin-top: 16px;
+  padding-bottom: 8px;
+}
+#total-calories{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+#name-tag{
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+#name-tag-input{
+  width: 100%;
+  padding: 4px 8px;
+}
+#save-plan-btn{
+  margin-top: 8px;
+}
+@media screen and (min-width: 768px){
+  #quantity-edit-container input{
+    width: 128px;
+  }
+}

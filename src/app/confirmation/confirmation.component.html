@@ -1,0 +1,24 @@
+<body>
+<div class="main-container">
+  <div class="confirmation">
+
+    <form [formGroup]="confirmationForm" (ngSubmit)="onConfirmationEmail()" >
+    <div class="email">
+      <input type="email"  id="email" class="form-control input-lg" placeholder="Email Address"
+             formControlName="email"
+
+             required
+             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+      >
+      <span class="text-muted" style="color: red;" *ngIf="!confirmationForm.controls['email'].valid && confirmationForm.controls['email']?.touched"> Please enter a valid email</span>
+
+    </div>
+      <div>
+        <button type="submit" class="btn btn-success" [disabled]="!confirmationForm.valid" style="margin-top: 20px" > Send Confirmation Mail</button>
+      </div>
+    </form>
+    <p *ngIf="confirmation==true" style="color: #1fd302; font-size: 16px;">{{message}}</p>
+
+  </div>
+</div>
+</body>

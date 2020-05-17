@@ -1,0 +1,102 @@
+body{
+  background: #008000;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.main-container{
+  width: 100%;
+position: absolute;
+}
+
+
+.signup{
+  position: relative;
+  width: 40%;
+  float: left;
+  margin-left: 8%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 40px;
+  background: white;
+   color: #006600;
+}
+
+.signup h1{
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.signup .weight input{
+  width: 50%;
+}
+.signup .height input{
+  width: 40%;
+  margin-right: 10px;
+  float: left;
+}
+.signup .gender input{
+  margin-left: 4px;
+}
+.signup .gender label{
+  margin-left: 2px;
+}
+
+
+
+#datefield{
+  margin-left: 30px;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+}
+.login{
+
+  width: 40%;
+  float: right;
+  margin-right: 8%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 40px;
+  background: white;
+}
+.login h1{
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 480px) {
+body{
+  height: 200vh;
+}
+  .signup{
+    width: 80%;
+    margin-left: 10%;
+    float: none;
+  }
+  .login{
+    width: 80%;
+    margin-left: 10%;
+    float: none;
+  }
+  .btn{
+    padding: 7px 14px;
+    font-size: 13px;
+    margin-bottom: 5px;
+
+  }
+}
+
+.verification i{
+  padding: 10px;
+  background: rgba(32, 203, 2, 0.51);
+  border-radius: 20px;
+  margin-right: 5px;
+  color: #006600;
+  cursor: pointer;
+}
+

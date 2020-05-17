@@ -1,0 +1,199 @@
+<div class="main-container">
+
+  <div class="head" id="diet1">
+    <h2 style="text-align: center; margin-top: 30px;
+     margin-bottom: 30px;"> Add Items</h2>
+  </div>
+
+  <div class="container">
+      <div class="add-item">
+        <div class="itemType">
+          <div class="form-group">
+            <select [(ngModel)]="selectedValue">
+              <option value="vegetables">vegetables</option>
+              <option value="fruits">fruits</option>
+              <option value="nuts">nuts</option>
+              <option value="seeds">seeds</option>
+              <option value="liquids">liquids</option>
+              <option value="powders">powders</option>
+              <option value="others">others</option>
+            </select>
+          </div>
+        </div>
+        <form  [formGroup]="addItemForm" (ngSubmit)="onSubmitAddItem()" >
+          <div class="names">
+          <div class="form-group name1">
+            <input type="text" id="name" class="form-control input-lg"
+                   placeholder="English name"
+                   formControlName="name"
+            >
+          </div>
+          <div class="form-group name1">
+            <input type="text" id="name" class="form-control input-lg"
+                   placeholder="Telugu name"
+                   formControlName="telName"
+            >
+          </div>
+          <div class="form-group name1">
+            <input type="text" id="name" class="form-control input-lg"
+                   placeholder="Hindi name"
+                   formControlName="hinName"
+            >
+          </div>
+          </div>
+
+
+
+          <div class="values">
+            <div class="form-group nutrient">
+              <input type="text" id="kcal" class="form-control input-lg"
+                     placeholder="calories"
+                     formControlName="kcal"
+              >
+            </div>
+
+            <div class="form-group nutrient">
+              <input type="text" id="carbs" class="form-control input-lg"
+                     placeholder="carbs"
+                     formControlName="carbs"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="protein" class="form-control input-lg"
+                     placeholder="protein"
+                     formControlName="protein"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="fat" class="form-control input-lg"
+                     placeholder="fat"
+                     formControlName="fat"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="sfat" class="form-control input-lg"
+                     placeholder="sfat"
+                     formControlName="sfat"
+              >
+            </div>
+          </div>
+
+          <div class="values">
+            <div class="form-group nutrient">
+              <input type="text" id="pfat" class="form-control input-lg"
+                     placeholder="Poly fat"
+                     formControlName="pfat"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="mfat" class="form-control input-lg"
+                     placeholder="Mono fat"
+                     formControlName="mfat"
+              >
+            </div>
+
+            <div class="form-group nutrient">
+              <input type="text" id="cholesterol" class="form-control input-lg"
+                     placeholder="cholesterol"
+                     formControlName="cholesterol"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="sodium" class="form-control input-lg"
+                     placeholder="sodium"
+                     formControlName="sodium"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="potassium" class="form-control input-lg"
+                     placeholder="potassium"
+                     formControlName="potassium"
+              >
+            </div>
+
+          </div>
+
+          <div class="values">
+            <div class="form-group nutrient">
+              <input type="text" id="dfib" class="form-control input-lg"
+                     placeholder="Dietary fib"
+                     formControlName="dfib"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="sugar" class="form-control input-lg"
+                     placeholder="sugar"
+                     formControlName="sugar"
+              >
+            </div>
+
+            <div class="form-group nutrient">
+              <input type="text" id="vitA" class="form-control input-lg"
+                     placeholder="vitamin A"
+                     formControlName="vitA"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="vitC" class="form-control input-lg"
+                     placeholder="vitamin C"
+                     formControlName="vitC"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="calcium" class="form-control input-lg"
+                     placeholder="calcium"
+                     formControlName="calcium"
+              >
+            </div>
+
+          </div>
+
+          <div class="values">
+            <div class="form-group nutrient">
+              <input type="text" id="iron" class="form-control input-lg"
+                     placeholder="iron"
+                     formControlName="iron"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="vitD" class="form-control input-lg"
+                     placeholder="vitamin D"
+                     formControlName="vitD"
+              >
+            </div>
+
+            <div class="form-group nutrient">
+              <input type="text" id="zinc" class="form-control input-lg"
+                     placeholder="zinc"
+                     formControlName="zinc"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="vitB12" class="form-control input-lg"
+                     placeholder="vitamin B12"
+                     formControlName="vitB12"
+              >
+            </div>
+            <div class="form-group nutrient">
+              <input type="text" id="mag" class="form-control input-lg"
+                     placeholder="magnesium"
+                     formControlName="mag"
+              >
+            </div>
+
+          </div>
+          <div class="itemType">
+            <input type="text" id="img" class="form-control input-lg"
+                   placeholder="Image URL"
+                   formControlName="imgUrl"
+            >
+          </div>
+          <button type="submit" class="btn btn-success saveItem"> Save Item</button>
+          <p *ngIf="message == true" style="color: #1fd302">Item Added</p>
+        </form>
+
+      </div>
+
+  </div>
+
+</div>
