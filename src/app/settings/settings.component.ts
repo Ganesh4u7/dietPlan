@@ -44,11 +44,11 @@ credentials;
 
 
   onUserSettings(){
-    let dob  = this.userSettings.value.dob;
-    let gender = this.userSettings.value.gender;
-    let weight= this.userSettings.value.weight;
-    let feet= this.userSettings.value.feet;
-    let inch = this.userSettings.value.inch;
+    var dob  = this.userSettings.value.dob;
+    var gender = this.userSettings.value.gender;
+    var weight= this.userSettings.value.weight;
+    var feet= this.userSettings.value.feet;
+    var inch = this.userSettings.value.inch;
 
     this.httpService.onSaveSettings({username:this.username,dob:dob,gender:gender,weight:weight,feet:feet,inch:inch}).subscribe(
       (response) => {this.settingsSaved = 1;
@@ -66,7 +66,7 @@ credentials;
     if(this.passwordForm.value.pwd == this.passwordForm.value.cpwd) {
 
       this.passCheck = true;
-      let pwd = this.passwordForm.value.pwd;
+      var pwd = this.passwordForm.value.pwd;
       this.httpService.onChangePwd({email:this.email,password:pwd}).subscribe(
         (response) => {this.pwdSaved = 1;
         this.passwordForm.reset()},

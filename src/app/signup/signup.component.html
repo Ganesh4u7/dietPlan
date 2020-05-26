@@ -1,4 +1,4 @@
-<body>
+
 
 <div class="main-container">
 
@@ -13,19 +13,36 @@
             <input type="text"  id="username" class="form-control input-lg"
                    placeholder="username"
                    formControlName="username"
-
+                   pattern=".{6,}"
+                   [(ngModel)]="nameCheck"
+                     (input)="searchName(nameCheck)"
                    required
-            >
-            <span class="text-muted"  style="color: red;" *ngIf="!signupForm.controls['username'].valid && signupForm.controls['username']?.touched"> Please enter a valid username</span>
+            ><div *ngIf="signupForm.controls['username'].valid && userFound == 2" class="spinner-border text-primary" role="status"
+          style="width: 20px;height: 20px;margin-left:15px;margin-top: 10px;">
+
+            <span class="sr-only">Loading...</span>
+          </div>
+            <p *ngIf="signupForm.controls['username'].valid && userFound == 1" style="font-size:14px;color: red;margin-left: 10px;margin-top: 8px;">Username taken</p>
+            <p *ngIf="signupForm.controls['username'].valid && userFound == 0" style="font-size:14px;color: green;margin-left: 10px;margin-top: 8px;">Available </p>
+            <span class="text-muted"  style="color: red;" *ngIf="!signupForm.controls['username'].valid && signupForm.controls['username']?.touched"> Please enter a valid username of atleast 6 charcters</span>
           </div>
 
           <div class="form-group">
             <input type="email"  id="email" class="form-control input-lg" placeholder="Email Address"
                    formControlName="email"
-
+                   [(ngModel)]="emailCheck"
+                   (input)="searchEmail()"
                    required
                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+
             >
+            <div *ngIf="signupForm.controls['email'].valid && emailFound == 2" class="spinner-border text-primary" role="status"
+                 style="width: 20px;height: 20px;margin-left:15px;margin-top: 10px;">
+
+              <span class="sr-only">Loading...</span>
+            </div>
+            <p *ngIf="signupForm.controls['email'].valid && emailFound == 1" style="font-size:14px;color: red;margin-left: 10px;margin-top: 8px;">Email taken</p>
+            <p *ngIf="signupForm.controls['email'].valid && emailFound == 0" style="font-size:14px;color: green;margin-left: 10px;margin-top: 8px;">Available </p>
             <span class="text-muted" style="color: red;" *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email']?.touched"> Please enter a valid email</span>
 
           </div>
@@ -34,7 +51,7 @@
             <input type="password" id="password" class="form-control input-lg" placeholder="Password"
                    formControlName="pwd"
                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-
+                    (input)="passwordCheck()"
                    required
             >
             <span class="text-muted" style="color: red;" *ngIf="!signupForm.controls['pwd'].valid && signupForm.controls['pwd']?.touched"> Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</span>
@@ -43,12 +60,16 @@
           <div class="form-group">
             <input type="password"  id="password2" class="form-control input-lg" placeholder="Password2"
                    formControlName="cpwd"
-                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  (input)="passwordCheck()"
                    required
             >
-            <span id='message'></span>
-            <span class="text-muted" style="color: red;" > {{passCheck}}</span>
+
+            <p  *ngIf="passCheck == true && signupForm.controls['pwd'].valid && signupForm.controls['pwd']?.touched && signupForm.controls['cpwd']?.touched"
+                  style="font-size:14px;margin-left: 10px;margin-top: 10px;color: green" > Matched</p>
+            <p  style="color: red;" *ngIf="passCheck == false && signupForm.controls['pwd'].valid && signupForm.controls['pwd']?.touched && signupForm.controls['cpwd']?.touched"
+               style="font-size:14px;margin-left: 10px;margin-top: 10px;color: red" >Not Matched</p>
           </div>
           <div class="gender form-group group radio-btns " style="margin-left: 8px" >
             <label class="radio inline" style="margin-right: 5px;" >Gender:</label>
@@ -92,7 +113,7 @@
           <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid" style="margin-top: 20px" > Submit</button>
         </div>
         <p *ngIf="signUpStatus == true" style="color: #1fd302;text-align: center">Sign up Completed ,A verification Email has been sent to your Email.</p>
-
+        <p *ngIf="signUpStatus == false" style="color: red;text-align: center">Username or Email already taken.</p>
       </fieldset>
     </form>
 
@@ -107,7 +128,7 @@
         <h1 class=" pull-center" style="color: #006600"> Login </h1>
 
         <div class="form-group">
-          <input type="email" id="lusername" class="form-control input-lg" placeholder="username"
+          <input type="email" id="lusername" class="form-control input-lg" placeholder="username or email"
                  formControlName="username"
 
                  required
@@ -146,7 +167,6 @@
 
 
 
-</body>
 <script>
   let today = new Date();
   let dd = today.getDate();

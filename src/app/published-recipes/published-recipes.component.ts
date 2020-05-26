@@ -24,10 +24,9 @@ export class PublishedRecipesComponent implements OnInit {
   ngOnInit(): void {
 
 this.plans = this.dietPlanService.publishedPlans;
-for(let i =0;i<this.plans.length;i++){
+for(var i =0;i<this.plans.length;i++){
   this.savedPublishPlanMessages[i]=false;
 }
-console.log(this.plans);
 this.username = this.dietPlanService.userCredentials.username;
 
   }
@@ -66,16 +65,16 @@ this.username = this.dietPlanService.userCredentials.username;
   }
 
   addPlan(index) {
-    let date = Date().toString().slice(0,24);
-      let nameTags = this.plans[index].nameTags;
-      let totals = this.plans[index].totals;
-      let plan = this.plans[index].plan;
+    var date = Date().toString().slice(0,24);
+      var nameTags = this.plans[index].nameTags;
+      var totals = this.plans[index].totals;
+      var plan = this.plans[index].plan;
 
     this.httpService.onSendPlans([plan,{nameTag:nameTags.nameTag,date:date,editMode:0,editPlanName:0,recipe:"",publish:0},totals,{username:this.dietPlanService.userCredentials.username,tot:this.dietPlanService.plansIds.length}]).subscribe(
       (response) => {
 this.savedPublishPlanMessages[index]=true;
         this.dietPlanService.plansIds.push(response.id);
-        console.log(response.id);
+
         this.dietPlanService.savedPlansArray.push(plan);
         this.dietPlanService.savedPlansTotals.push(totals);
         this.dietPlanService.savedPlansNametags.push({nameTag:nameTags.nameTag,date:date,editMode:0,editPlanName:0,recipe:"",publish:0});
@@ -103,7 +102,7 @@ this.savedPublishPlanMessages[index]=true;
 
   sendUpvote(id,index){
     this.httpService.onSendUpvote({username:this.username,id:id}).subscribe(
-      (responce)=>{console.log(responce);
+      (responce)=>{
        if(responce.success == true){
          this.dietPlanService.publishedPlans[index].upvotes = responce.upvotes;
          this.dietPlanService.publishedPlans[index].upvoteCheck = true;

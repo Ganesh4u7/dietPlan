@@ -19,12 +19,12 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 
 
-// app.use(cors());
-// var corsOptions = {
-//   origin: 'http://know-your-calories.herokuapp.com/',
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
-// app.options('*', cors())
+app.use(cors());
+var corsOptions = {
+  origin: 'http://know-your-calories.herokuapp.com/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.options('*', cors())
 
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -38,10 +38,12 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.static(path.join(__dirname, './dist/dietplan')));
-app.get('/',function(req,res){
+// app.get('/',function(req,res){
+//   res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
+// });
+app.all('/', function(req, res, next) {
   res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
 });
-
 app.use('',require('./routes/requests'));
 
 module.exports = app;

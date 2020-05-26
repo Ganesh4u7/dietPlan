@@ -82,13 +82,13 @@ this.bmrCalc();
   }
 
   bmi(){
-    let weight = this.dietPlanService.userCredentials.weight *2.2;
+    var weight = this.dietPlanService.userCredentials.weight *2.2;
     this.details.weight =this.dietPlanService.userCredentials.weight
-    let feet = this.dietPlanService.userCredentials.feet;
+    var feet = this.dietPlanService.userCredentials.feet;
     this.details.feet = feet;
-    let inch = this.dietPlanService.userCredentials.inch;
+    var inch = this.dietPlanService.userCredentials.inch;
     this.details.inch = inch;
-    let totalInches = (feet * 12) + inch;
+    var totalInches = (feet * 12) + inch;
     var bmi=((weight/Math.pow(totalInches,2))*703);
 
     this.dataSource.dials.dial[0].value = bmi;
@@ -102,18 +102,16 @@ screenWidth(){
     this.height = (screen.width * 0.25);
   }
   else if(screen.width<720){
-    console.log(screen.width)
     this.width = (screen.width * 0.80);
     this.height =(screen.width * 0.45)
   }
 }
 
   bmrCalc(){
-console.log(this.dietPlanService.userCredentials.gender);
     if(this.dietPlanService.userCredentials.gender == 'male'){
-      let weight1 = this.dietPlanService.userCredentials.weight;
-      let height1 = (this.dietPlanService.userCredentials.feet *30.48) + (this.dietPlanService.userCredentials.inch * 2.54);
-      let age = this.calculateAge(this.dietPlanService.userCredentials.dob);
+      var weight1 = this.dietPlanService.userCredentials.weight;
+      var height1 = (this.dietPlanService.userCredentials.feet *30.48) + (this.dietPlanService.userCredentials.inch * 2.54);
+      var age = this.calculateAge(this.dietPlanService.userCredentials.dob);
 
       // console.log(age);
       this.bmr = (10 *weight1) + (6.25 * height1) - (5*age) + 5;

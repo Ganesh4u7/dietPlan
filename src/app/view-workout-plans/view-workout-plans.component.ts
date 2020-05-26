@@ -66,15 +66,15 @@ export class ViewWorkoutPlansComponent implements OnInit {
 
   }
   deletePlan1(index) {
-    let username = this.dietPlanService.userCredentials.username;
-    let plansId = this.dietPlanService.savedWorkoutPlansArray[index][0]._id;
-    let totalsId = this.dietPlanService.savedWorkoutPlansTotals[index]._id;
-    let tagsId = this.dietPlanService.savedWorkoutPlansNametags[index]._id;
-    let id = this.dietPlanService.workoutPlansIds[index];
+    var username = this.dietPlanService.userCredentials.username;
+    var plansId = this.dietPlanService.savedWorkoutPlansArray[index][0]._id;
+    var totalsId = this.dietPlanService.savedWorkoutPlansTotals[index]._id;
+    var tagsId = this.dietPlanService.savedWorkoutPlansNametags[index]._id;
+    var id = this.dietPlanService.workoutPlansIds[index];
 
 
     this.httpService.onDeleteWorkoutPlan({username:username,index:index,id:id}).subscribe(
-      (response) => console.log(response),
+      (response) => {},
       (error) => console.log(error)
     );
     this.savedWorkoutPlansNametags.splice(index, 1);
@@ -90,17 +90,17 @@ export class ViewWorkoutPlansComponent implements OnInit {
 
   }
   saveName1(index,changedName){
-    let username = this.dietPlanService.userCredentials.username;
+    var username = this.dietPlanService.userCredentials.username;
     this.savedWorkoutPlansNametags[index].nameTag= changedName;
     this.savedWorkoutPlansNametags[index].editPlanName= 0;
     this.bol1 = false;
 
 
-    let id = this.dietPlanService.workoutPlansIds[index];
+    var id = this.dietPlanService.workoutPlansIds[index];
 
 
     this.httpService.onEditWorkoutName({_id: id, nameTag:changedName,index:index,username: username}).subscribe(
-      (response) => console.log(response),
+      (response) => {},
       (error) => console.log(error)
     );
 

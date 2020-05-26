@@ -23,8 +23,20 @@ router.post('/login',function (req,res) {
  // console.log(req.body);
   let username = req.body.username;
   let pwd = req.body.password;
-
-  userData.find({username:username},function (err1,data1) {
+  let query;
+  let email = req.body.email;
+  if(email == 1){
+    query = {
+      email:username
+    };
+  }
+  else if(email == 0){
+    query ={
+      username:username
+    };
+  }
+console.log(query,email);
+  userData.find(query,function (err1,data1) {
   //  console.log(data1[0]);
     if(err1){
       console.log(err1);
@@ -70,9 +82,21 @@ router.post('/getData',verifyToken,function(req,res){
     if(err){
       res.sendStatus(403);
     }else{
-      let username = req.body.username;
+      let username1 = req.body.username;
+      let query;
+      let email = req.body.email;
+      if(email == 1){
+        query = {
+          email:username1
+        };
+      }
+      else if(email == 0){
+        query ={
+          username:username1
+        };
+      }
       //console.log('in it1');
-      userData.find({username:username},function (err1,data1) {
+      userData.find(query,function (err1,data1) {
         //  console.log(data1[0]);
         if(err1){
           console.log(err1);
@@ -133,6 +157,9 @@ router.post('/signup',function (req,res) {
   data.save(function (err,userData) {
     if(err){
       console.log(err);
+      if(err.code == 11000){
+        res.send({username: username,success: false});
+      }
       res.send({username: username,success: false});
     }
     else {
@@ -624,6 +651,22 @@ router.post('/addItem',function (req,res) {
     }
   });
 
+});
+router.post('/checkUsername',function (req,res) {
+  let query = req.body.query;
+  userData.find(query,function (err,data) {
+    if(err){
+      console.log(err)
+    }
+    else {
+      if(data.length == 0){
+        res.send({success:true,found:0});
+      }
+      else if(data.length > 0){
+        res.send({success:true,found:1})
+      }
+    }
+  });
 });
 
 function verifyToken(req,res,next){

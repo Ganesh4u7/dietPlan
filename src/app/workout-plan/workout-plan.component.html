@@ -14,43 +14,45 @@
 
       </div>
       <div id="item-types-container1">
-        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'sports' }">
-          <a (click)="onMenuButtonSelect('sports')">Sports</a>
+        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'sports' }" (click)="onMenuButtonSelect('sports')">
+          <a >Sports</a>
         </div>
-        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'houseWorks' }">
-          <a (click)="onMenuButtonSelect('houseWorks')">House Works</a>
+        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'houseWorks' }" (click)="onMenuButtonSelect('houseWorks')">
+          <a >House Works</a>
         </div>
-        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'endurance' }">
-          <a (click)="onMenuButtonSelect('endurance')">Endurance</a>
+        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'endurance' }" (click)="onMenuButtonSelect('endurance')">
+          <a >Endurance</a>
         </div>
-        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'strength' }">
-          <a (click)="onMenuButtonSelect('strength')">Strength</a>
+        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'strength' }" (click)="onMenuButtonSelect('strength')">
+          <a >Strength</a>
         </div>
-        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'flexibility' }">
-          <a (click)="onMenuButtonSelect('flexibility')">flexibility</a>
+        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'flexibility' }" (click)="onMenuButtonSelect('flexibility')">
+          <a >flexibility</a>
         </div>
-        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'conditioning' }">
-          <a (click)="onMenuButtonSelect('conditioning')">Conditioning</a>
+        <div class="item-type" [ngClass]="{ 'selected': currentSelectedbutton == 'conditioning' }" (click)="onMenuButtonSelect('conditioning')">
+          <a >Conditioning</a>
         </div>
       </div>
       <div class="right-scroll" style=" font-size: 30px;float: left;">
         <a (click)="scrollRight1()"> <i class="fas fa-caret-right" > </i></a>
       </div>
     </div>
-      <div
+    <div id="search"><input type="text" [(ngModel)]="searchText" (input)="onSearch(searchText)" placeholder=" Search Items"></div>
+      <div id="large-screen"
         cdkDropList
         #toDoList1 = "cdkDropList"
         [cdkDropListData]="selectedItemType1"
         [cdkDropListConnectedTo]="[doneList1]"
         class="example-list group"
         (cdkDropListDropped)="drop1($event,'todo1')" >
+        <!--<cdk-virtual-scroll-viewport itemSize="153.25" class="example-viewport">-->
         <div id="highlight" class="example-box group"
           [style.background-color]="getBackgroundColor1(i)"
           *ngFor="let item of selectedItemType1;let i = index"
           cdkDrag (click)="clickLeft1(i)" >
           <div class="drag-item">
             <div class="item-image">
-              <img src="https://www.searchpng.com/wp-content/uploads/2019/05/Apple-PNG-images-715x715.jpg" alt="">
+              <img src={{item.imgUrl}} alt="">
             </div>
             <div class="item-title">
               <p class="title-text-1">{{item.name}}</p>
@@ -61,7 +63,31 @@
             <p class="title-text-2">10 Min</p>
           </div>
         </div>
+        <!--</cdk-virtual-scroll-viewport>-->
       </div>
+    <div id="small-screen"
+
+      class="example-list group" >
+      <!--<cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">-->
+      <div id="highlight1" class="example-box group"
+           [style.background-color]="getBackgroundColor1(i)"
+           *ngFor="let item of selectedItemType1;let i = index"
+            (click)="clickLeft1(i)" >
+        <div class="drag-item">
+          <div class="item-image">
+            <img src={{item.imgUrl}} alt="">
+          </div>
+          <div class="item-title">
+            <p class="title-text-1">{{item.name}}<a (click)="moveToChoosen(i)"><i class="fas fa-plus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
+            <p class="title-text-2">{{item.description}}</p>
+          </div>
+          <div class="seperator"></div>
+          <p class="title-text-1">{{(10*3.5*(item.met*personWeight/200)).toFixed(2)}} Calories</p>
+          <p class="title-text-2">10 Min</p>
+        </div>
+      </div>
+      <!--</cdk-virtual-scroll-viewport>-->
+    </div>
   </div>
   <div id="box-2">
     <div id="arrows-mobile">
@@ -84,7 +110,7 @@
   <div id="box-3">
     <h2>Choosen Exercises</h2>
       <div class="seperator"></div>
-      <div
+      <div id="large-screen1"
         cdkDropList
         #doneList1="cdkDropList"
         [cdkDropListData]="done1"
@@ -97,13 +123,13 @@
           cdkDrag (click)="clickRight1(i)">
           <div class="drag-item">
             <div class="item-image">
-              <img src="https://www.searchpng.com/wp-content/uploads/2019/05/Apple-PNG-images-715x715.jpg" alt="">
+              <img src={{item.imgUrl}} alt="">
             </div>
             <div class="item-title">
               <p class="title-text-1">{{item.name}}</p>
               <p class="title-text-2">{{item.description}}</p>
               <div id="quantity-edit-container">
-                <input type="number" class="form-control" value="10" #weight> &nbsp; mins
+                <input type="number" class="form-control" value="5" #weight> &nbsp; mins
                 <button class="btn btn-success" (click)="add(i,weight)">add</button>
               </div>
             </div>
@@ -114,6 +140,36 @@
         </div>
 
       </div>
+    <div id="small-screen1"
+      cdkDropList
+      #doneList1="cdkDropList"
+      [cdkDropListData]="done1"
+      [cdkDropListConnectedTo]="toDoList1"
+      class="example-list "
+      (cdkDropListDropped)="drop1($event,'done1')" style="min-height: 230px;margin-top: 72px;">
+      <div class="example-box group"
+           [style.background-color]="getBackgroundColorRight1(i)"
+           *ngFor="let item of done1;let i = index;"
+           (click)="clickRight1(i)">
+        <div class="drag-item">
+          <div class="item-image">
+            <img src={{item.imgUrl}} alt="">
+          </div>
+          <div class="item-title">
+            <p class="title-text-1">{{item.name}}<a (click)="moveToItemslist(i)" style="z-index: 99999;"><i class="fas fa-minus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
+            <p class="title-text-2">{{item.description}}</p>
+            <div id="quantity-edit-container">
+              <input type="number" class="form-control" value="10" #weight (click)="clickRight1(i)"> &nbsp; mins
+              <button class="btn btn-success" (click)="add(i,weight)">add</button>
+            </div>
+          </div>
+          <div class="seperator"></div>
+          <p class="title-text-1">{{(item.mins*3.5*(item.met*personWeight/200)).toFixed(2)}} Calories</p>
+
+        </div>
+      </div>
+
+    </div>
       <div id="total-container">
         <h2>Total</h2>
         <div class="seperator"></div>

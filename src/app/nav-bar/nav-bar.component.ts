@@ -17,12 +17,10 @@ toggleItems = false;
   toggle(){
     if(this.toggleItems == false){
       this.toggleItems = true;
-      console.log(this.toggleItems);
       document.getElementById('items').style.display = 'block';
     }
     else if(this.toggleItems == true){
       this.toggleItems = false;
-      console.log(this.toggleItems);
       document.getElementById('items').style.display = 'none';
     }
   }

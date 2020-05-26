@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { FusionChartsModule } from 'angular-fusioncharts';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
@@ -22,6 +23,7 @@ import * as FusionCharts from 'fusioncharts';
 
 // Load Widgets
 import * as Widgets from 'fusioncharts/fusioncharts.widgets';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 // Load FusionTheme Theme
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
@@ -64,10 +66,12 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-    FormsModule,ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     FusionChartsModule,
     HttpClientModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ScrollingModule
   ],
   providers: [AuthGuard,LoginService,DietPlanService,HttpService],
   bootstrap: [AppComponent]

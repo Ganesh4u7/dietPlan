@@ -14,7 +14,7 @@
   </div>
 <div id="main-container">
   <div id="box-1">
-    <h2>Items List</h2>
+    <h2>Items List </h2>
       <div class="seperator"></div>
 
     <div id="items-menu">
@@ -49,26 +49,35 @@
     </div>
     </div>
     <div id="search"><input type="text" [(ngModel)]="searchText" (input)="onSearch(searchText)" placeholder=" Search Items"></div>
-      <div
+      <div id="large-screen"
         cdkDropList
         #toDoList = "cdkDropList"
         [cdkDropListData]="selectedItemType"
         [cdkDropListConnectedTo]="[doneList]"
         class="example-list group"
         (cdkDropListDropped)="drop($event,'todo')" >
+
         <div class="wrapper">
-        <div id="highlight" class="example-box group"
+
+            <!--<cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">-->
+        <div id="highlight" class="example-box group "
           [style.background-color]="getBackgroundColor(i)"
-          *ngFor="let item of selectedItemType|filter:searchText;let i = index ;"
+             *ngFor="let item of selectedItemType;let i = index ;"
           cdkDrag (click)="clickLeft(i)">
-          <div class="drag-item">
+          <div class="drag-item " *ngIf="item.index != -1"
+              >
             <div class="item-image">
-              <img src="https://www.searchpng.com/wp-content/uploads/2019/05/Apple-PNG-images-715x715.jpg" alt="">
+              <img src={{item.imgUrl}} alt="">
             </div>
+            <!--<div class="selectItem">-->
+            <!--<a><i class="far fa-check-circle" style="font-size: 25px;color: #006600;float: right"></i></a>-->
+          <!--</div>-->
             <div class="item-title">
               <p class="title-text-1">{{item.name}}</p>
               <p class="title-text-2">100 {{item.metric}}</p>
+
             </div>
+
             <div class="seperator"></div>
             <p class="title-text-1">{{(100*item.kcal).toFixed(1)}} Calories</p>
             <div class="left-scroll" style="margin-right: 10px">
@@ -106,8 +115,78 @@
             <p class="title-text-2"></p>
           </div>
         </div>
+            <!--</cdk-virtual-scroll-viewport>-->
+
         </div>
       </div>
+    <div id="small-screen"
+         cdkDropList
+         #toDoList = "cdkDropList"
+         [cdkDropListData]="selectedItemType"
+         [cdkDropListConnectedTo]="[doneList]"
+         class="example-list group"
+         (cdkDropListDropped)="drop($event,'todo')">
+
+
+          <!--<cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">-->
+      <div class="wrapper">
+        <div id="highlight1" class="example-box group "
+             [style.background-color]="getBackgroundColor(i)"
+        *ngFor="let item of selectedItemType;let i = index ;"
+              (click)="clickLeft(i)">
+          <div class="drag-item">
+            <div class="item-image">
+              <img src={{item.imgUrl}} alt="">
+            </div>
+
+            <div class="item-title">
+              <p class="title-text-1">{{item.name}}<a (click)="moveToChoosen(i)"><i class="fas fa-plus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
+              <p class="title-text-2">100 {{item.metric}}</p>
+
+            </div>
+
+            <div class="seperator"></div>
+            <p class="title-text-1">{{(100*item.kcal).toFixed(1)}} Calories</p>
+            <div class="left-scroll" style="margin-right: 10px">
+              <a (click)="scrollLeft1(i)"><i class="fas fa-caret-left" style="float: left; font-size: 30px; z-index: 99999;" ></i></a>
+
+            </div>
+            <div class="actual-items1">
+              <div class="protein-box actual-type">
+                Protein : {{(100*item.protein).toFixed(1)}}g
+              </div>
+
+              <div class="carbs-box actual-type">
+                Carbs : {{(100*item.carbs).toFixed(1)}}g
+              </div>
+              <div class="fat-box actual-type">
+                Fat : {{(100*item.fat).toFixed(1)}}g
+              </div>
+              <div class="protein-box actual-type">
+                Sugar : {{(100*item.sugar).toFixed(1)}}g
+              </div>
+              <div class="carbs-box actual-type">
+                Sodium : {{(100*item.sodium).toFixed(1)}}g
+              </div>
+              <div class="fat-box actual-type">
+                Dietary Fiber : {{(100*item.DFib).toFixed(1)}}g
+              </div>
+              <div class="protein-box actual-type">
+                Saturated Fat : {{(100*item.sfat).toFixed(1)}}g
+              </div>
+
+            </div>
+            <div class="right-scroll" style=" margin-left: 10px; font-size: 30px;float: left;">
+              <a (click)="scrollRight1(i)" > <i class="fas fa-caret-right" style="margin-bottom: 10px; z-index: 99999;" > </i></a>
+            </div>
+            <p class="title-text-2"></p>
+          </div>
+        </div>
+      </div>
+          <!--</cdk-virtual-scroll-viewport>-->
+
+
+    </div>
   </div>
   <div id="box-2">
     <div id="arrows-mobile">
@@ -144,7 +223,7 @@
           cdkDrag (click)="clickRight(i)">
           <div class="drag-item">
             <div class="item-image">
-              <img src="https://www.searchpng.com/wp-content/uploads/2019/05/Apple-PNG-images-715x715.jpg" alt="">
+              <img src={{item.imgUrl}} alt="">
             </div>
             <div class="item-title">
               <p class="title-text-1">{{item.name}}</p>
@@ -168,6 +247,44 @@
           </div>
         </div>
       </div>
+    <div
+         cdkDropList
+         #doneList="cdkDropList"
+         [cdkDropListData]="done"
+         [cdkDropListConnectedTo]="toDoList"
+         id="choosen-items1"
+         class="example-list "
+         (cdkDropListDropped)="drop($event,'done')">
+      <div style="padding: 8px;" class="example-box group"
+           [style.background-color]="getBackgroundColorRight(i)"
+           *ngFor="let item of done;let i = index;"
+            (click)="clickRight(i)">
+        <div class="drag-item">
+          <div class="item-image">
+            <img src={{item.imgUrl}} alt="">
+          </div>
+          <div class="item-title">
+            <p class="title-text-1">{{item.name}}<a (click)="moveToItemslist(i)" style="z-index: 99999;"><i class="fas fa-minus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
+            <div id="quantity-edit-container">
+              <input type="number" class="form-control" value="100" #weight (click)="clickRight(i)"> &nbsp;{{item.metric}}
+              <button class="btn btn-success" (click)="add(i,weight)">add</button>
+            </div>
+          </div>
+          <div class="seperator"></div>
+          <p class="title-text-1">{{(item.sWeight *item.kcal).toFixed(1)}} Calories</p>
+          <div class="protein-box">
+            Protein : {{(item.sWeight*item.protein).toFixed(1)}}g
+          </div>
+          <div class="carbs-box">
+            Carbs : {{(item.sWeight*item.carbs).toFixed(1)}}g
+          </div>
+          <div class="fat-box">
+            Fat : {{(item.sWeight*item.fat).toFixed(1)}}g
+          </div>
+          <p class="title-text-2"></p>
+        </div>
+      </div>
+    </div>
       <div id="total-container">
         <h2>Total</h2>
         <div class="seperator"></div>

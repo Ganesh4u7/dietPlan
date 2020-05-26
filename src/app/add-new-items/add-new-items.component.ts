@@ -44,31 +44,31 @@ export class AddNewItemsComponent implements OnInit {
   }
 
   onSubmitAddItem(){
-    let name = this.addItemForm.value.name;
-    let telName = this.addItemForm.value.telName;
-    let hinName = this.addItemForm.value.hinName;
-    let kcal = this.addItemForm.value.kcal;
-    let carbs =  this.addItemForm.value.carbs;
-    let protein = this.addItemForm.value.protein;
-    let fat  = this.addItemForm.value.fat;
-    let sfat = this.addItemForm.value.sfat;
-    let pfat = this.addItemForm.value.pfat;
-    let mfat = this.addItemForm.value.mfat;
-    let cholesterol = this.addItemForm.value.cholesterol;
-    let sodium = this.addItemForm.value.sodium;
-    let potassium  = this.addItemForm.value.potassium;
-    let dfib = this.addItemForm.value.dfib;
-    let sugar = this.addItemForm.value.sugar;
-    let vitA = this.addItemForm.value.vitA;
-    let vitC  = this.addItemForm.value.vitC;
-    let calcium  = this.addItemForm.value.calcium;
-    let iron = this.addItemForm.value.iron;
-    let vitD = this.addItemForm.value.vitD;
-    let zinc = this.addItemForm.value.zinc;
-    let vitB12 = this.addItemForm.value.vitB12;
-    let mag = this.addItemForm.value.mag;
-    let itemType = this.selectedValue;
-    let imgUrl = this.addItemForm.value.imgUrl;
+    var name = this.addItemForm.value.name;
+    var telName = this.addItemForm.value.telName;
+    var hinName = this.addItemForm.value.hinName;
+    var kcal = this.addItemForm.value.kcal;
+    var carbs =  this.addItemForm.value.carbs;
+    var protein = this.addItemForm.value.protein;
+    var fat  = this.addItemForm.value.fat;
+    var sfat = this.addItemForm.value.sfat;
+    var pfat = this.addItemForm.value.pfat;
+    var mfat = this.addItemForm.value.mfat;
+    var cholesterol = this.addItemForm.value.cholesterol;
+    var sodium = this.addItemForm.value.sodium;
+    var potassium  = this.addItemForm.value.potassium;
+    var dfib = this.addItemForm.value.dfib;
+    var sugar = this.addItemForm.value.sugar;
+    var vitA = this.addItemForm.value.vitA;
+    var vitC  = this.addItemForm.value.vitC;
+    var calcium  = this.addItemForm.value.calcium;
+    var iron = this.addItemForm.value.iron;
+    var vitD = this.addItemForm.value.vitD;
+    var zinc = this.addItemForm.value.zinc;
+    var vitB12 = this.addItemForm.value.vitB12;
+    var mag = this.addItemForm.value.mag;
+    var itemType = this.selectedValue;
+    var imgUrl = this.addItemForm.value.imgUrl;
 
     this.httpService.onAddItem({
       name:name,telName:telName,hinName:hinName,kcal:kcal,carbs:carbs,protein:protein,fat:fat,sfat:sfat,pfat:pfat,mfat:mfat,

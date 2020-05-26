@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {DietPlanService} from '../diet-plan.service';
 import {HttpClient} from '@angular/common/http';
@@ -20,6 +21,8 @@ export class CreatePlanComponent implements OnInit {
   planSelectedButton: string = 'createDietPlan';
   menuButtonSubscription: Subscription;
   publishPlanTextArea = false;
+  lastIndex = 5;
+  scrollvalue =false;
 
   searchText;
   selectedItemType :any = [];
@@ -37,6 +40,7 @@ export class CreatePlanComponent implements OnInit {
   seeds;
   liquids;
   others;
+  filtered;
 
 
 
@@ -54,7 +58,6 @@ export class CreatePlanComponent implements OnInit {
   clickedFruites:any = [];
   clickedVegetables: any = [];
   constructor( private dietPlanService: DietPlanService,
-
                private http: HttpClient,
                private httpService: HttpService) { }
 
@@ -81,16 +84,96 @@ export class CreatePlanComponent implements OnInit {
     this.menuButtonSubscription.unsubscribe()
   }
 
-  onSearch(search){
-    var PATTERN = search,
-      filtered = this.selectedItemType.filter( (str)=> {
-       if( str.name.toLowerCase().includes(PATTERN) ){
-         return str;
-       }
+  onSearch(search) {
+    var PATTERN = search.toLowerCase();
+    if(this.searchText != undefined){
+      if (this.lastSelectedItemName == 'vegetables') {
 
+      this.filtered = this.vegetables.filter((str) => {
+        if (str.name.toLowerCase().includes(PATTERN)) {
+          return str;
+        }
       });
-    this.selectedItemType1 = filtered;
 
+      this.selectedItemType=this.filtered;
+
+    }
+    else if (this.lastSelectedItemName == 'fruits') {
+
+      this.filtered = this.fruits.filter((str) => {
+        if (str.name.toLowerCase().includes(PATTERN)) {
+          return str;
+
+        }
+      });
+      this.selectedItemType=this.filtered;
+
+    }
+    else if (this.lastSelectedItemName == 'liquids') {
+
+      this.filtered = this.liquids.filter((str) => {
+        if (str.name.toLowerCase().includes(PATTERN)) {
+          return str;
+        }
+      });
+      this.selectedItemType=this.filtered;
+
+    }
+    else if (this.lastSelectedItemName == 'nuts') {
+
+      this.filtered = this.nuts.filter((str) => {
+        if (str.name.toLowerCase().includes(PATTERN)) {
+          return str;
+        }
+      });
+      this.selectedItemType=this.filtered;
+
+    }
+    else if (this.lastSelectedItemName == 'seeds') {
+
+      this.filtered = this.seeds.filter((str) => {
+        if (str.name.toLowerCase().includes(PATTERN)) {
+          return str;
+        }
+      });
+      this.selectedItemType=this.filtered;
+
+    }
+    else if (this.lastSelectedItemName == 'others') {
+
+      this.filtered = this.others.filter((str) => {
+        if (str.name.toLowerCase().includes(PATTERN)) {
+          return str;
+        }
+      });
+      this.selectedItemType=this.filtered;
+    }
+  }
+    this.selectedItemType1 = this.filtered;
+
+
+
+ if(this.searchText == undefined){
+  if(this.lastSelectedItemName =="vegetables"){
+    this.selectedItemType=this.vegetables;
+  }
+  else if (this.lastSelectedItemName =="fruits"){
+    this.selectedItemType=this.fruits;
+
+  }
+  else if (this.lastSelectedItemName =="seeds"){
+    this.selectedItemType=this.seeds;
+  }
+  else if (this.lastSelectedItemName =="nuts"){
+    this.selectedItemType=this.nuts;
+  }
+  else if (this.lastSelectedItemName =="liquids"){
+    this.selectedItemType=this.liquids;
+  }
+  else if (this.lastSelectedItemName =="others"){
+    this.selectedItemType=this.others;
+  }
+}
 
 
   }
@@ -99,10 +182,8 @@ export class CreatePlanComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>,arrayName: string) {
 
     if (event.previousContainer === event.container) {
-
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
+    }else{
       if(arrayName == 'todo') {
         if (this.done[event.previousIndex].itemType == 'vegetables') {
           this.done[event.previousIndex].click = 0;
@@ -112,6 +193,7 @@ export class CreatePlanComponent implements OnInit {
             event.container.data,
             event.previousIndex,
             event.currentIndex);
+          this.totalValues();
         }
         else if (this.done[event.previousIndex].itemType == 'fruits') {
           this.done[event.previousIndex].click =0;
@@ -121,6 +203,7 @@ export class CreatePlanComponent implements OnInit {
             event.container.data,
             event.previousIndex,
             event.currentIndex);
+          this.totalValues();
         }
         else if (this.done[event.previousIndex].itemType == 'seeds') {
           this.done[event.previousIndex].click =0;
@@ -130,6 +213,7 @@ export class CreatePlanComponent implements OnInit {
             event.container.data,
             event.previousIndex,
             event.currentIndex);
+          this.totalValues();
         }
         else if (this.done[event.previousIndex].itemType == 'liquids') {
           this.done[event.previousIndex].click =0;
@@ -139,6 +223,7 @@ export class CreatePlanComponent implements OnInit {
             event.container.data,
             event.previousIndex,
             event.currentIndex);
+          this.totalValues();
         }
         else if (this.done[event.previousIndex].itemType == 'nuts') {
           this.done[event.previousIndex].click =0;
@@ -148,6 +233,7 @@ export class CreatePlanComponent implements OnInit {
             event.container.data,
             event.previousIndex,
             event.currentIndex);
+          this.totalValues();
         }
         else if (this.done[event.previousIndex].itemType == 'others') {
           this.done[event.previousIndex].click =0;
@@ -157,36 +243,100 @@ export class CreatePlanComponent implements OnInit {
             event.container.data,
             event.previousIndex,
             event.currentIndex);
+          this.totalValues();
         }
 
       }
       else if(arrayName == 'done'){
 
              if(this.searchText == undefined) {
-               this.selectedItemType[event.previousIndex].click =1;
-               transferArrayItem(event.previousContainer.data,
-                 event.container.data,
-                 event.previousIndex,
-                 event.currentIndex)
+                   this.selectedItemType[event.previousIndex].click =1;
+                   this.done.splice(event.currentIndex,0,this.selectedItemType[event.previousIndex]);
+                    this.selectedItemType.splice(event.previousIndex,1);
+                  this.totalValues();
 
              }
              else if(this.searchText != undefined){
-               for( let j =0 ; j<this.selectedItemType.length; j++){
-                  if(this.selectedItemType[j].name == this.selectedItemType1[event.previousIndex].name){
-                    this.selectedItemType[j].click =1;
-                    this.selectedItemType.splice(j,1);
-                     this.searchText = undefined;
-                  }
-               }
-               transferArrayItem(this.selectedItemType1,
-                 event.container.data,
-                 event.previousIndex,
-                 event.currentIndex)
 
+
+                var index = this.selectedItemType[event.previousIndex].index;
+
+               if(this.lastSelectedItemName == 'vegetables'){
+                for(var i =0;i<=this.vegetables.length;i++){
+                  if(index == this.vegetables[i].index){
+                    this.vegetables[i].click =1;
+                    this.done.splice(event.currentIndex,0,this.vegetables[i]);
+                    this.vegetables.splice(i,1);
+                    this.selectedItemType.splice(event.previousIndex,1);
+                    this.totalValues();
+                    break;
+                  }
+                }
+               }
+              else if(this.lastSelectedItemName == 'fruits'){
+                 for(var i =0;i<=this.fruits.length;i++){
+                   if(index == this.fruits[i].index){
+                     this.fruits[i].click =1;
+                     this.done.splice(event.currentIndex,0,this.fruits[i]);
+                     this.fruits.splice(i,1);
+                     this.selectedItemType.splice(event.previousIndex,1);
+                     this.totalValues();
+                     break;
+                   }
+                 }
+               }
+               else if(this.lastSelectedItemName == 'liquids'){
+                 for(var i =0;i<=this.liquids.length;i++){
+                   if(index == this.liquids[i].index){
+                     this.liquids[i].click =1;
+                     this.done.splice(event.currentIndex,0,this.liquids[i]);
+                     this.liquids.splice(i,1);
+                     this.selectedItemType.splice(event.previousIndex,1);
+                     this.totalValues();
+                     break;
+                   }
+                 }
+               }
+               else if(this.lastSelectedItemName == 'nuts'){
+                 for(var i =0;i<=this.nuts.length;i++){
+                   if(index == this.nuts[i].index){
+                     this.nuts[i].click =1;
+                     this.done.splice(event.currentIndex,0,this.nuts[i]);
+                     this.nuts.splice(i,1);
+                     this.selectedItemType.splice(event.previousIndex,1);
+                     this.totalValues();
+                     break;
+                   }
+                 }
+               }
+               else if(this.lastSelectedItemName == 'seeds'){
+                 for(var i =0;i<=this.seeds.length;i++){
+                   if(index == this.seeds[i].index){
+                     this.seeds[i].click =1;
+                     this.done.splice(event.currentIndex,0,this.seeds[i]);
+                     this.seeds.splice(i,1);
+                     this.selectedItemType.splice(event.previousIndex,1);
+                     this.totalValues();
+                     break;
+                   }
+                 }
+               }
+               else if(this.lastSelectedItemName == 'others'){
+                 for(var i =0;i<=this.others.length;i++){
+                   if(index == this.others[i].index){
+                     this.others[i].click =1;
+                     this.done.splice(event.currentIndex,0,this.others[i]);
+                     this.others.splice(i,1);
+                     this.selectedItemType.splice(event.previousIndex,1);
+                     this.totalValues();
+                     break;
+                   }
+                 }
+               }
              }
 
       }
-      let str = this.vegetables[event.previousIndex];
+      var str = this.vegetables[event.previousIndex];
 
       // this.done.splice(event.currentIndex,0,str);
       this.totalValues();
@@ -195,15 +345,15 @@ export class CreatePlanComponent implements OnInit {
 
 
   add(i,weight){
-    let integer = parseInt(weight.value, 10);
+    var integer = parseInt(weight.value, 10);
     this.done[i].sWeight = integer;
     this.totalValues();
-
+    this.clickRight(i);
   }
   savePlan(tag){
 
 
-    let date = Date().toString().slice(0,24);
+    var date = Date().toString().slice(0,24);
 
     this.httpService.onSendPlans([this.done,{nameTag:tag.value,date:date,editMode:0,editPlanName:0,recipe:"",publish:0},this.total,{username:this.dietPlanService.userCredentials.username,tot:this.dietPlanService.plansIds.length}]).subscribe(
       (response) => {
@@ -216,7 +366,6 @@ export class CreatePlanComponent implements OnInit {
     );
 
 
- console.log(this.dietPlanService.savedPlansNametags);
  this.done= [];
     // this.httpService.onSendTotals(this.total).subscribe(
     //   (response) => console.log(response),
@@ -249,7 +398,7 @@ export class CreatePlanComponent implements OnInit {
       kcal:0,protein:0,carbs:0,fat:0,sfat:0,DFib:0,sugar:0,sodium:0,weight:0
 
     }
-    for(let i=0;i<this.done.length;i++){
+    for(var i=0;i<this.done.length;i++){
       this.total.kcal += this.done[i].kcal*this.done[i].sWeight;
       this.total.protein += this.done[i].protein*this.done[i].sWeight;
       this.total.carbs += this.done[i].carbs*this.done[i].sWeight;
@@ -260,7 +409,6 @@ export class CreatePlanComponent implements OnInit {
       this.total.sodium += this.done[i].sodium*this.done[i].sWeight;
       this.total.weight += this.done[i].sWeight;
     }
-    console.log(this.total);
   }
 
   changeItems(itemType){
@@ -270,8 +418,8 @@ export class CreatePlanComponent implements OnInit {
       this.lastSelectedItemName = itemType;
     }
     else if (itemType =="fruits"){
-      this.selectedItemType=this.fruits;
-      this.lastSelectedItemName = itemType;
+        this.selectedItemType=this.fruits;
+        this.lastSelectedItemName = itemType;
     }
     else if (itemType =="seeds"){
       this.selectedItemType=this.seeds;
@@ -294,51 +442,117 @@ export class CreatePlanComponent implements OnInit {
 
   clickLeft(index){
     if(this.lastSelectedItemName == 'vegetables'){
-      if(this.vegetables[index].click == 0){
-        this.vegetables[index].click = 1;
+      if(this.searchText == undefined) {
+        if (this.vegetables[index].click == 0) {
+          this.vegetables[index].click = 1;
+        }
+        else {
+          this.vegetables[index].click = 0;
+        }
       }
-      else{
-        this.vegetables[index].click = 0;
+      else if(this.searchText != undefined){
+        // for(var i =0;i<this.vegetables.length;i++){
+        //   if(this.selectedItemType[index].index == this.vegetables[i].index){
+            if(this.selectedItemType[index].click ==0){
+              this.selectedItemType[index].click = 1;
+            }
+            else {
+              this.selectedItemType[index].click = 0;
+            }
+        //   }
+        // }
+
       }
     }
-    else if(this.lastSelectedItemName == 'fruites'){
-      if(this.fruits[index].click == 0){
-        this.fruits[index].click = 1;
+    else if(this.lastSelectedItemName == 'fruits'){
+      if(this.searchText == undefined) {
+        if (this.fruits[index].click == 0) {
+          this.fruits[index].click = 1;
+        }
+        else {
+          this.fruits[index].click = 0;
+        }
       }
-      else{
-        this.fruits[index].click = 0;
-      }
-    }
-    else if(this.lastSelectedItemName == 'nuts'){
-      if(this.fruits[index].click == 0){
-        this.fruits[index].click = 1;
-      }
-      else{
-        this.fruits[index].click = 0;
+      else if(this.searchText != undefined){
+        if(this.selectedItemType[index].click ==0){
+          this.selectedItemType[index].click = 1;
+        }
+        else {
+          this.selectedItemType[index].click = 0;
+        }
       }
     }
     else if(this.lastSelectedItemName == 'liquids'){
-      if(this.fruits[index].click == 0){
-        this.fruits[index].click = 1;
+      if(this.searchText == undefined) {
+        if (this.liquids[index].click == 0) {
+          this.liquids[index].click = 1;
+        }
+        else {
+          this.liquids[index].click = 0;
+        }
       }
-      else{
-        this.fruits[index].click = 0;
+      else if(this.searchText != undefined){
+        if(this.selectedItemType[index].click ==0){
+          this.selectedItemType[index].click = 1;
+        }
+        else {
+          this.selectedItemType[index].click = 0;
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'nuts'){
+      if(this.searchText == undefined) {
+        if (this.nuts[index].click == 0) {
+          this.nuts[index].click = 1;
+        }
+        else {
+          this.nuts[index].click = 0;
+        }
+      }
+      else if(this.searchText != undefined){
+        if(this.selectedItemType[index].click ==0){
+          this.selectedItemType[index].click = 1;
+        }
+        else {
+          this.selectedItemType[index].click = 0;
+        }
       }
     }
     else if(this.lastSelectedItemName == 'seeds'){
-      if(this.fruits[index].click == 0){
-        this.fruits[index].click = 1;
+      if(this.searchText == undefined) {
+        if (this.seeds[index].click == 0) {
+          this.seeds[index].click = 1;
+        }
+        else {
+          this.seeds[index].click = 0;
+        }
       }
-      else{
-        this.fruits[index].click = 0;
+      else if(this.searchText != undefined){
+        if(this.selectedItemType[index].click ==0){
+          this.selectedItemType[index].click = 1;
+        }
+        else {
+          this.selectedItemType[index].click = 0;
+        }
       }
     }
+
     else if(this.lastSelectedItemName == 'others'){
-      if(this.fruits[index].click == 0){
-        this.fruits[index].click = 1;
+      if(this.searchText == undefined) {
+        if (this.others[index].click == 0) {
+          this.others[index].click = 1;
+        }
+        else {
+          this.others[index].click = 0;
+        }
       }
-      else{
-        this.fruits[index].click = 0;
+      else if(this.searchText != undefined){
+        if(this.selectedItemType[index].click ==0){
+          this.selectedItemType[index].click = 1;
+        }
+        else {
+          this.selectedItemType[index].click = 0;
+        }
       }
     }
 
@@ -457,17 +671,20 @@ export class CreatePlanComponent implements OnInit {
   rightMove(){
 
     if(this.lastSelectedItemName == 'vegetables'){
-      for(let i=this.vegetables.length-1 ;i>=0;i--){
-        if(this.vegetables[i].click ==1){
-          this.done.push(this.vegetables[i]);
-          this.vegetables.splice(i,1);
-          this.totalValues();
+        for (var i = this.vegetables.length - 1; i >= 0; i--) {
+          if (this.vegetables[i].click == 1) {
+            this.done.push(this.vegetables[i]);
+            this.vegetables.splice(i, 1);
+            this.totalValues();
 
+          }
         }
-      }
+        this.selectedItemType =this.vegetables;
+        this.searchText = undefined;
+
     }
-    else if(this.lastSelectedItemName == 'fruites'){
-      for(let i=this.fruits.length-1 ;i>=0;i--){
+    else if(this.lastSelectedItemName == 'fruits'){
+      for(var i=this.fruits.length-1 ;i>=0;i--){
         if(this.fruits[i].click ==1){
           this.done.push(this.fruits[i]);
           this.fruits.splice(i,1);
@@ -475,58 +692,68 @@ export class CreatePlanComponent implements OnInit {
 
         }
       }
+      this.selectedItemType =this.fruits;
+      this.searchText = undefined;
     }
     else if(this.lastSelectedItemName == 'nuts'){
-      for(let i=this.fruits.length-1 ;i>=0;i--){
-        if(this.fruits[i].click ==1){
-          this.done.push(this.fruits[i]);
-          this.fruits.splice(i,1);
+      for(var i=this.nuts.length-1 ;i>=0;i--){
+        if(this.nuts[i].click ==1){
+          this.done.push(this.nuts[i]);
+          this.nuts.splice(i,1);
           this.totalValues();
 
         }
       }
+      this.selectedItemType =this.nuts;
+      this.searchText = undefined;
     }
     else if(this.lastSelectedItemName == 'seeds'){
-      for(let i=this.fruits.length-1 ;i>=0;i--){
-        if(this.fruits[i].click ==1){
-          this.done.push(this.fruits[i]);
-          this.fruits.splice(i,1);
+      for(var i=this.seeds.length-1 ;i>=0;i--){
+        if(this.seeds[i].click ==1){
+          this.done.push(this.seeds[i]);
+          this.seeds.splice(i,1);
           this.totalValues();
 
         }
       }
+      this.selectedItemType =this.seeds;
+      this.searchText = undefined;
     }
     else if(this.lastSelectedItemName == 'liquids'){
-      for(let i=this.fruits.length-1 ;i>=0;i--){
-        if(this.fruits[i].click ==1){
-          this.done.push(this.fruits[i]);
-          this.fruits.splice(i,1);
+      for(var i=this.liquids.length-1 ;i>=0;i--){
+        if(this.liquids[i].click ==1){
+          this.done.push(this.liquids[i]);
+          this.liquids.splice(i,1);
           this.totalValues();
 
         }
       }
+      this.selectedItemType =this.liquids;
+      this.searchText = undefined;
     }
     else if(this.lastSelectedItemName == 'others'){
-      for(let i=this.fruits.length-1 ;i>=0;i--){
-        if(this.fruits[i].click ==1){
-          this.done.push(this.fruits[i]);
-          this.fruits.splice(i,1);
+      for(var i=this.others.length-1 ;i>=0;i--){
+        if(this.others[i].click ==1){
+          this.done.push(this.others[i]);
+          this.others.splice(i,1);
           this.totalValues();
 
         }
       }
+      this.selectedItemType =this.others;
+      this.searchText = undefined;
     }
   }
   leftMove(){
 
-    for(let i =this.done.length-1 ;i>=0;i--){
+    for(var i =this.done.length-1 ;i>=0;i--){
       if(this.done[i].click == 0) {
         if (this.done[i].itemType == 'vegetables') {
           this.vegetables.push(this.done[i]);
           this.done.splice(i,1);
           this.totalValues();
         }
-        else if(this.done[i].itemType == 'fruites')
+        else if(this.done[i].itemType == 'fruits')
         {
           this.fruits.push(this.done[i]);
           this.done.splice(i,1);
@@ -534,25 +761,25 @@ export class CreatePlanComponent implements OnInit {
         }
         else if(this.done[i].itemType == 'liquids')
         {
-          this.fruits.push(this.done[i]);
+          this.liquids.push(this.done[i]);
           this.done.splice(i,1);
           this.totalValues();
         }
         else if(this.done[i].itemType == 'nuts')
         {
-          this.fruits.push(this.done[i]);
+          this.nuts.push(this.done[i]);
           this.done.splice(i,1);
           this.totalValues();
         }
         else if(this.done[i].itemType == 'seeds')
         {
-          this.fruits.push(this.done[i]);
+          this.seeds.push(this.done[i]);
           this.done.splice(i,1);
           this.totalValues();
         }
         else if(this.done[i].itemType == 'others')
         {
-          this.fruits.push(this.done[i]);
+          this.others.push(this.done[i]);
           this.done.splice(i,1);
           this.totalValues();
         }
@@ -578,6 +805,7 @@ export class CreatePlanComponent implements OnInit {
 
   onMenuButtonSelect(buttonName: string){
     this.menuButtonSelected.next(buttonName);
+    this.searchText= undefined;
     this.changeItems(this.currentSelectedbutton);
 
   }
@@ -590,18 +818,313 @@ export class CreatePlanComponent implements OnInit {
     document.getElementById("item-types-container").scrollBy (-100,0);
   }
   scrollRight1(index){
-    document.getElementsByClassName("actual-items")[index].scrollBy (+200,0);
+    document.getElementsByClassName("actual-items")[index].scrollBy (200,0);
+    document.getElementsByClassName("actual-items1")[index].scrollBy (200,0);
     this.clickLeft(index);
   }
 
   scrollLeft1(index){
     document.getElementsByClassName("actual-items")[index].scrollBy (-200,0);
+    document.getElementsByClassName("actual-items1")[index].scrollBy (-200,0);
     this.clickLeft(index);
   }
+
 
   publishPlan() {
     this.publishPlanTextArea = true;
   }
 
 
+ moveToChoosen(index){
+
+    if(this.lastSelectedItemName == 'vegetables'){
+      if(this.searchText == undefined){
+        this.vegetables[index].click=1;
+        this.done.push(this.vegetables[index]);
+        this.vegetables.splice(index,1);
+        this.selectedItemType.splice(index,1);
+        this.totalValues();
+      }
+      else if(this.searchText != undefined){
+        var index1 = this.selectedItemType[index].index;
+        for(var i =0;i<=this.vegetables.length;i++){
+          if(index1 == this.vegetables[i].index){
+            this.vegetables[i].click =1;
+            this.done.push(this.vegetables[i]);
+            this.vegetables.splice(i,1);
+            this.selectedItemType.splice(index,1);
+            this.totalValues();
+            break;
+          }
+        }
+      }
+    }
+   else if(this.lastSelectedItemName == 'fruits'){
+      if(this.searchText == undefined){
+        this.fruits[index].click=1;
+        this.done.push(this.fruits[index]);
+        this.fruits.splice(index,1);
+        this.selectedItemType.splice(index,1);
+        this.totalValues();
+      }
+      else if(this.searchText != undefined){
+        var index1 = this.selectedItemType[index].index;
+        for(var i =0;i<=this.fruits.length;i++){
+          if(index1 == this.fruits[i].index){
+            this.fruits[i].click =1;
+            this.done.push(this.fruits[i]);
+            this.fruits.splice(i,1);
+            this.selectedItemType.splice(index,1);
+            this.totalValues();
+            break;
+          }
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'liquids'){
+      if(this.searchText == undefined){
+        this.liquids[index].click=1;
+        this.done.push(this.liquids[index]);
+        this.liquids.splice(index,1);
+        this.selectedItemType.splice(index,1);
+        this.totalValues();
+      }
+      else if(this.searchText != undefined){
+        var index1 = this.selectedItemType[index].index;
+        for(var i =0;i<=this.liquids.length;i++){
+          if(index1 == this.liquids[i].index){
+            this.liquids[i].click =1;
+            this.done.push(this.liquids[i]);
+            this.liquids.splice(i,1);
+            this.selectedItemType.splice(index,1);
+            this.totalValues();
+            break;
+          }
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'nuts'){
+      if(this.searchText == undefined){
+        this.nuts[index].click=1;
+        this.done.push(this.nuts[index]);
+        this.nuts.splice(index,1);
+        this.selectedItemType.splice(index,1);
+        this.totalValues();
+      }
+      else if(this.searchText != undefined){
+        var index1 = this.selectedItemType[index].index;
+        for(var i =0;i<=this.nuts.length;i++){
+          if(index1 == this.nuts[i].index){
+            this.nuts[i].click =1;
+            this.done.push(this.nuts[i]);
+            this.nuts.splice(i,1);
+            this.selectedItemType.splice(index,1);
+            this.totalValues();
+            break;
+          }
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'seeds'){
+      if(this.searchText == undefined){
+        this.seeds[index].click=1;
+        this.done.push(this.seeds[index]);
+        this.seeds.splice(index,1);
+        this.selectedItemType.splice(index,1);
+        this.totalValues();
+      }
+      else if(this.searchText != undefined){
+        var index1 = this.selectedItemType[index].index;
+        for(var i =0;i<=this.seeds.length;i++){
+          if(index1 == this.seeds[i].index){
+            this.seeds[i].click =1;
+            this.done.push(this.seeds[i]);
+            this.seeds.splice(i,1);
+            this.selectedItemType.splice(index,1);
+            this.totalValues();
+            break;
+          }
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'others'){
+      if(this.searchText == undefined){
+        this.others[index].click=1;
+        this.done.push(this.others[index]);
+        this.others.splice(index,1);
+        this.selectedItemType.splice(index,1);
+        this.totalValues();
+      }
+      else if(this.searchText != undefined){
+        var index1 = this.selectedItemType[index].index;
+        for(var i =0;i<=this.others.length;i++){
+          if(index1 == this.others[i].index){
+            this.others[i].click =1;
+            this.done.push(this.others[i]);
+            this.others.splice(i,1);
+            this.selectedItemType.splice(index,1);
+            this.totalValues();
+            break;
+          }
+        }
+      }
+    }
+ }
+
+ moveToItemslist(index){
+   if (this.done[index].itemType == 'vegetables') {
+     this.done[index].click=0;
+     this.vegetables.push(this.done[index]);
+     this.selectedItemType.push(this.done[index]);
+     this.done.splice(index,1);
+     this.totalValues();
+   }
+   else if(this.done[index].itemType == 'fruits')
+   {
+     this.done[index].click=0;
+     this.fruits.push(this.done[index]);
+     this.selectedItemType.push(this.done[index]);
+     this.done.splice(index,1);
+     this.totalValues();
+   }
+   else if(this.done[index].itemType == 'liquids')
+   {
+     this.done[index].click=0;
+     this.liquids.push(this.done[index]);
+     this.selectedItemType.push(this.done[index]);
+     this.done.splice(index,1);
+     this.totalValues();
+   }
+   else if(this.done[index].itemType == 'nuts')
+   {
+     this.done[index].click=0;
+     this.nuts.push(this.done[index]);
+     this.selectedItemType.push(this.done[index]);
+     this.done.splice(index,1);
+     this.totalValues();
+   }
+   else if(this.done[index].itemType == 'seeds')
+   {
+     this.done[index].click=0;
+     this.seeds.push(this.done[index]);
+     this.selectedItemType.push(this.done[index]);
+     this.done.splice(index,1);
+     this.totalValues();
+   }
+   else if(this.done[index].itemType == 'others')
+   {
+     this.done[index].click=0;
+     this.others.push(this.done[index]);
+     this.selectedItemType.push(this.done[index]);
+     this.done.splice(index,1);
+     this.totalValues();
+   }
+
+ }
+  // onScrollDown() {
+  //   if (this.lastSelectedItemName == 'vegetables') {
+  //
+  //   if (this.lastIndex < this.vegetables.length) {
+  //     for (var i = this.lastIndex; i < this.lastIndex + 5; i++) {
+  //       if (this.selectedItemType.length == this.vegetables.length) {
+  //         this.lastIndex = 99999;
+  //         this.scrollvalue = true;
+  //         break;
+  //       }
+  //       else {
+  //         this.selectedItemType.push(this.vegetables[i]);
+  //       }
+  //     }
+  //     this.lastIndex += 5;
+  //    }
+  //   }
+  //
+  //  else if (this.lastSelectedItemName == 'fruits') {
+  //
+  //     if (this.lastIndex < this.fruits.length) {
+  //       for (var i = this.lastIndex; i < this.lastIndex + 5; i++) {
+  //         if (this.selectedItemType.length == this.fruits.length) {
+  //           this.lastIndex = 99999;
+  //           this.scrollvalue = true;
+  //           break;
+  //         }
+  //         else {
+  //           this.selectedItemType.push(this.fruits[i]);
+  //         }
+  //       }
+  //       this.lastIndex += 5;
+  //     }
+  //   }
+  //   else if (this.lastSelectedItemName == 'liquids') {
+  //
+  //     if (this.lastIndex < this.liquids.length) {
+  //       for (var i = this.lastIndex; i < this.lastIndex + 5; i++) {
+  //         if (this.selectedItemType.length == this.liquids.length) {
+  //           this.lastIndex = 99999;
+  //           this.scrollvalue = true;
+  //           break;
+  //         }
+  //         else {
+  //           this.selectedItemType.push(this.liquids[i]);
+  //         }
+  //       }
+  //       this.lastIndex += 5;
+  //     }
+  //   }
+  //   else if (this.lastSelectedItemName == 'nuts') {
+  //
+  //     if (this.lastIndex < this.nuts.length) {
+  //       for (var i = this.lastIndex; i < this.lastIndex + 5; i++) {
+  //         if (this.selectedItemType.length == this.nuts.length) {
+  //           this.lastIndex = 99999;
+  //           this.scrollvalue = true;
+  //           break;
+  //         }
+  //         else {
+  //           this.selectedItemType.push(this.nuts[i]);
+  //         }
+  //       }
+  //       this.lastIndex += 5;
+  //     }
+  //   }
+  //   else if (this.lastSelectedItemName == 'seeds') {
+  //
+  //     if (this.lastIndex < this.seeds.length) {
+  //       for (var i = this.lastIndex; i < this.lastIndex + 5; i++) {
+  //         if (this.selectedItemType.length == this.seeds.length) {
+  //           this.lastIndex = 99999;
+  //           this.scrollvalue = true;
+  //           break;
+  //         }
+  //         else {
+  //           this.selectedItemType.push(this.seeds[i]);
+  //         }
+  //       }
+  //       this.lastIndex += 5;
+  //     }
+  //   }
+  //   else if (this.lastSelectedItemName == 'others') {
+  //
+  //     if (this.lastIndex < this.others.length) {
+  //       for (var i = this.lastIndex; i < this.lastIndex + 5; i++) {
+  //         if (this.selectedItemType.length == this.others.length) {
+  //           this.lastIndex = 99999;
+  //           this.scrollvalue = true;
+  //           break;
+  //         }
+  //         else {
+  //           this.selectedItemType.push(this.others[i]);
+  //         }
+  //       }
+  //       this.lastIndex += 5;
+  //     }
+  //   }
+  //
+  //
+  //
+  // }
+  //
+  // onScrollUp() {
+  //   console.log('scrolled up!!');
+  // }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HttpService} from '../http.service';
 import {DietPlanService} from '../diet-plan.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact-us',
@@ -12,6 +13,7 @@ export class ContactUsComponent implements OnInit {
   messageForm:FormGroup;
   messageSent = false;
   constructor( private httpService: HttpService,
+               private router: Router,
                private  dietService:DietPlanService) {
   }
 
@@ -24,9 +26,8 @@ export class ContactUsComponent implements OnInit {
   }
 
   onSubmitMessage(){
-   let subject =this.messageForm.value.subject;
-   let message = this.messageForm.value.message;
-   console.log(this.dietService.userCredentials.email);
+   var subject =this.messageForm.value.subject;
+   var message = this.messageForm.value.message;
    this.httpService.onSendMessage({username:this.dietService.userCredentials.username,email:this.dietService.userCredentials.email,
    subject:subject,message:message}).subscribe(
      (response)=>{
@@ -37,6 +38,9 @@ export class ContactUsComponent implements OnInit {
      },
    (error)=>{console.log(error)}
    );
+  }
+  addItem(){
+ this.router.navigate(['/add-item']);
   }
 
 }

@@ -23,7 +23,7 @@ export class ConfirmationComponent implements OnInit {
   }
 
   onConfirmationEmail() {
-   let email = this.confirmationForm.value.email;
+   var email = this.confirmationForm.value.email;
     this.httpService.onSendMail({email:email}).subscribe(
       (response) => {
         if(response.success == true){

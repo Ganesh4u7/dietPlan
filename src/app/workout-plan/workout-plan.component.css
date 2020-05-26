@@ -8,7 +8,10 @@
   font-size: 30px;
   color: #008000;
 }
+.example-viewport {
+  height: 30rem;
 
+}
 
 .plan-menu{
   margin-top: 10px;
@@ -26,7 +29,12 @@ nav{
   width: 0px;
   background: transparent; /* make scrollbar transparent */
 }
-
+#small-screen{
+  display: none;
+}
+#small-screen1{
+  display: none;
+}
 h2{
   /* font-family:"Great Vibes",cursive; */
   font-size: 35px;
@@ -110,7 +118,16 @@ input[type=text]{
 input[type=radio]{
   width: 5%;
 }
+#search input{
+  margin: 10px 0px;
+  margin-left: 10%;
+  width: 80%;
+  border-radius: 40px;
+}
+#search input::placeholder{
+  text-align: center;
 
+}
 
 
 .arrows{
@@ -228,7 +245,7 @@ margin-left: 10px;
 
   /* width */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
   }
 
   /* Track */
@@ -242,7 +259,7 @@ margin-left: 10px;
   ::-webkit-scrollbar-thumb {
     background: #006600;
     width: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
   }
 
   /* Handle on hover */
@@ -508,5 +525,19 @@ margin-left: 10px;
 @media screen and (min-width: 768px){
   #quantity-edit-container input{
     width: 128px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #small-screen{
+    display: block;
+  }
+  #large-screen{
+    display: none;
+  }
+  #small-screen1{
+    display: block;
+  }
+  #large-screen1{
+    display: none;
   }
 }

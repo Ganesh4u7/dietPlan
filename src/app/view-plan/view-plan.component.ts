@@ -25,7 +25,7 @@ export class ViewPlanComponent implements OnInit {
     this.savedPlansArray = this.dietPlanService.savedPlansArray;
     this.savedPlansNametags =this.dietPlanService.savedPlansNametags;
     this.savedPlansTotals = this.dietPlanService.savedPlansTotals;
-    let len =this.savedPlansTotals.length;
+    var len =this.savedPlansTotals.length;
 
 
   }
@@ -67,24 +67,24 @@ export class ViewPlanComponent implements OnInit {
     var recipe1 = recipe.replace("\r\n", "<br />\r\n");
     this.savedPlansNametags[index].recipe = recipe1;
     this.savedPlansNametags[index].editMode =1;
-    let username = this.dietPlanService.userCredentials.username;
-    let id = this.dietPlanService.plansIds[index];
-    console.log(recipe1);
+    var username = this.dietPlanService.userCredentials.username;
+    var id = this.dietPlanService.plansIds[index];
+
     this.httpService.onSaveRecipeName({username:username,index:index,id :id,recipe:recipe1}).subscribe(
-      (response) => console.log(response),
+      (response) => {},
       (error) => console.log(error)
     );
   }
   deletePlan(index) {
-    let username = this.dietPlanService.userCredentials.username;
-    let plansId = this.dietPlanService.savedPlansArray[index][0]._id;
-    let totalsId = this.dietPlanService.savedPlansTotals[index]._id;
-    let tagsId = this.dietPlanService.savedPlansNametags[index]._id;
-    let id = this.dietPlanService.plansIds[index];
+    var username = this.dietPlanService.userCredentials.username;
+    var plansId = this.dietPlanService.savedPlansArray[index][0]._id;
+    var totalsId = this.dietPlanService.savedPlansTotals[index]._id;
+    var tagsId = this.dietPlanService.savedPlansNametags[index]._id;
+    var id = this.dietPlanService.plansIds[index];
 
 
     this.httpService.onDeletePlan({username:username,index:index,id:id}).subscribe(
-      (response) => console.log(response),
+      (response) => {},
       (error) => console.log(error)
     );
     this.savedPlansNametags.splice(index, 1);
@@ -101,18 +101,17 @@ export class ViewPlanComponent implements OnInit {
 
     }
     saveName(index,changedName){
-     let username = this.dietPlanService.userCredentials.username;
+     var username = this.dietPlanService.userCredentials.username;
     this.savedPlansNametags[index].nameTag= changedName;
     this.savedPlansNametags[index].editPlanName= 0;
     this.bol = false;
 
    // console.log(this.dietPlanService.plansIds[index]);
-    let id = this.dietPlanService.plansIds[index];
+    var id = this.dietPlanService.plansIds[index];
 
-    console.log(id,changedName,index);
 
       this.httpService.onEditName({_id: id, nameTag:changedName,index:index,username: username}).subscribe(
-        (response) => console.log(response),
+        (response) => {},
         (error) => console.log(error)
       );
 
@@ -140,12 +139,12 @@ export class ViewPlanComponent implements OnInit {
   publishPlan(i){
     var r = confirm('are you sure you want to Publish this Plan ?');
     if (r == true) {
-      let name = this.dietPlanService.userCredentials.username;
-      let date = Date().toString().slice(0,24);
-      let nameTags = this.savedPlansNametags[i];
+      var name = this.dietPlanService.userCredentials.username;
+      var date = Date().toString().slice(0,24);
+      var nameTags = this.savedPlansNametags[i];
       nameTags.date = date;
-      let totals = this.savedPlansTotals[i];
-      let plan = this.savedPlansArray[i];
+      var totals = this.savedPlansTotals[i];
+      var plan = this.savedPlansArray[i];
      this.httpService.onPublishRecipe({creatorName:name,nameTags:nameTags,totals:totals,plan:plan,username:this.dietPlanService.userCredentials.username,index:i ,id:this.savedPlansNametags[i]._id}).subscribe(
        (response)=>{console.log(response)
         if(response.success == true){

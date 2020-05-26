@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HttpService} from '../http.service';
 import {DietPlanService} from '../diet-plan.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,7 +22,8 @@ export class ForgotPasswordComponent implements OnInit {
   email;
 
   constructor( private httpService: HttpService,
-               private dietService: DietPlanService) {
+               private dietService: DietPlanService,
+               private router: Router) {
   }
 
   ngOnInit(): void {
@@ -38,16 +40,15 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onConfirmationEmail() {
-    let email = this.confirmationForm.value.email;
+    var email = this.confirmationForm.value.email;
     this.email = email;
     this.httpService.onForgotPassword({email:email}).subscribe(
       (response) => {
-        console.log(response);
         if(response.success == true){
           this.confirmation = true;
           this.dietService.secretKey = response.secretKey;
           this.message = 'Verification Code has been sent to your Email';
-          console.log(this.message);
+
         }
         else{
           this.confirmation = false;
@@ -60,8 +61,8 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onCheckCode(){
-    let enteredCode = this.verificationForm.value.key;
-    let secretKey = this.dietService.secretKey;
+    var enteredCode = this.verificationForm.value.key;
+    var secretKey = this.dietService.secretKey;
     if(enteredCode == secretKey){
       this.verification = true;
       this.message1 = 'Valid Code';
@@ -76,8 +77,8 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onChangePassword(){
-    let pwd = this.passwordChangeForm.value.pwd;
-    let cpwd = this.passwordChangeForm.value.cpwd;
+    var pwd = this.passwordChangeForm.value.pwd;
+    var cpwd = this.passwordChangeForm.value.cpwd;
     if(pwd == cpwd) {
 
       this.passCheck = true;
@@ -88,5 +89,8 @@ export class ForgotPasswordComponent implements OnInit {
       );
 
     }
+  }
+  onLogin(){
+    this.router.navigate(['/']);
   }
 }

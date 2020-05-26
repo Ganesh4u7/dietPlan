@@ -170,6 +170,14 @@ export class HttpService {
         return throwError('Something went wrong!');
       }));
   }
+  onCheckUsername(data){
+    return this.http.post('/checkUsername', data, {responseType: 'json'}).pipe(
+      map((data: any) => {
+        return data;
+      }), catchError(error => {
+        return throwError('Something went wrong!');
+      }));
+  }
 
   // onLogin(data) {
   //   return this.http.post('http://localhost:4300/login', data, {responseType: 'json'}).pipe(
@@ -321,6 +329,14 @@ export class HttpService {
   // }
   // onAddItem(data){
   //   return this.http.post('http://localhost:4300/addItem', data, {responseType: 'json'}).pipe(
+  //     map((data: any) => {
+  //       return data;
+  //     }), catchError(error => {
+  //       return throwError('Something went wrong!');
+  //     }));
+  // }
+  // onCheckUsername(data){
+  //   return this.http.post('http://localhost:4300/checkUsername', data, {responseType: 'json'}).pipe(
   //     map((data: any) => {
   //       return data;
   //     }), catchError(error => {
