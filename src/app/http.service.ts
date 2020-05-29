@@ -327,14 +327,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  // onAddItem(data){
-  //   return this.http.post('http://localhost:4300/addItem', data, {responseType: 'json'}).pipe(
-  //     map((data: any) => {
-  //       return data;
-  //     }), catchError(error => {
-  //       return throwError('Something went wrong!');
-  //     }));
-  // }
+  //
   // onCheckUsername(data){
   //   return this.http.post('http://localhost:4300/checkUsername', data, {responseType: 'json'}).pipe(
   //     map((data: any) => {

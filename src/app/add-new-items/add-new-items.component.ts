@@ -33,6 +33,9 @@ export class AddNewItemsComponent implements OnInit {
       sugar : new FormControl(null),
       vitA : new FormControl(null),
       vitC : new FormControl(null),
+      vitK : new FormControl(null),
+      vitE : new FormControl(null),
+      vitB6 : new FormControl(null),
       calcium : new FormControl(null),
       iron : new FormControl(null),
       vitD: new FormControl(null),
@@ -64,7 +67,10 @@ export class AddNewItemsComponent implements OnInit {
     var calcium  = this.addItemForm.value.calcium;
     var iron = this.addItemForm.value.iron;
     var vitD = this.addItemForm.value.vitD;
+    var vitK = this.addItemForm.value.vitK;
+    var vitE = this.addItemForm.value.vitE;
     var zinc = this.addItemForm.value.zinc;
+    var vitB6 = this.addItemForm.value.vitB6;
     var vitB12 = this.addItemForm.value.vitB12;
     var mag = this.addItemForm.value.mag;
     var itemType = this.selectedValue;
@@ -73,11 +79,12 @@ export class AddNewItemsComponent implements OnInit {
     this.httpService.onAddItem({
       name:name,telName:telName,hinName:hinName,kcal:kcal,carbs:carbs,protein:protein,fat:fat,sfat:sfat,pfat:pfat,mfat:mfat,
       cholesterol:cholesterol,sodium:sodium,potassium:potassium,dfib:dfib,sugar:sugar,vitA:vitA,vitC:vitC,calcium:calcium,
-      iron:iron,vitD:vitD,zinc:zinc,vitB12:vitB12,mag:mag,sWeight:100,click:0,itemType:itemType,weight:100,imgUrl:imgUrl
+      iron:iron,vitD:vitD,zinc:zinc,vitB12:vitB12,vitE:vitE,vitK:vitK,vitB6:vitB6,mag:mag,sWeight:100,click:0,itemType:itemType,weight:100,imgUrl:imgUrl
     }).subscribe(
       (response) => {
         if(response.success == true){
           this.message = true;
+          this.addItemForm.reset();
         }
       },
       (error) => console.log(error)
