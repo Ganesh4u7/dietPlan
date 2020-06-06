@@ -24,6 +24,7 @@ import * as FusionCharts from 'fusioncharts';
 // Load Widgets
 import * as Widgets from 'fusioncharts/fusioncharts.widgets';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {ScrollingModule as ExperimentalScrollingModule} from '@angular/cdk-experimental/scrolling';
 
 // Load FusionTheme Theme
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
@@ -40,6 +41,8 @@ import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AddNewItemsComponent } from './add-new-items/add-new-items.component';
+import { StartPageComponent } from './start-page/start-page.component';
+import { LoginComponent } from './login/login.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -60,18 +63,21 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
     ConfirmationComponent,
     ForgotPasswordComponent,
     ContactUsComponent,
-    AddNewItemsComponent
+    AddNewItemsComponent,
+    StartPageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    ScrollingModule,
+    ExperimentalScrollingModule,
     AppRoutingModule,
     DragDropModule,
     FormsModule,
     ReactiveFormsModule,
     FusionChartsModule,
     HttpClientModule,
-    Ng2SearchPipeModule,
-    ScrollingModule
+    Ng2SearchPipeModule
   ],
   providers: [AuthGuard,LoginService,DietPlanService,HttpService],
   bootstrap: [AppComponent]

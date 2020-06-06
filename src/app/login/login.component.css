@@ -16,7 +16,7 @@ body{
 
 
   min-height: 100vh;
-position: absolute;
+  position: absolute;
 }
 
 
@@ -24,12 +24,12 @@ position: absolute;
   position: relative;
   width: 40%;
   float: left;
-  margin-left: 30%;
+  margin-left: 8%;
   margin-top: 30px;
   margin-bottom: 5%;
   padding: 40px;
   background: white;
-   color: #006600;
+  color: #006600;
 }
 
 .signup h1{
@@ -62,8 +62,8 @@ position: absolute;
 .login{
 
   width: 40%;
-  float: right;
-  margin-right: 8%;
+  float: left;
+  margin-left: 30%;
   margin-top: 30px;
   margin-bottom: 30px;
   padding: 40px;
@@ -76,14 +76,10 @@ position: absolute;
 }
 
 @media screen and (max-width: 480px) {
-body{
-  height: 200vh;
-}
-  .signup{
-    width: 80%;
-    margin-left: 10%;
-    float: none;
+  body{
+    height: 200vh;
   }
+
   .login{
     width: 80%;
     margin-left: 10%;

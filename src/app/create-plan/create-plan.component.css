@@ -41,6 +41,7 @@ h2{
 }
 
 #highlight{
+  height:153.25px;
 }
 #plan-menu{
   margin: 8px;
@@ -393,9 +394,9 @@ margin-left: 10px;
   background-color: green;
   color: white;
 }
-.drag-item{
-  width: 100%;
-}
+/*.drag-item{*/
+  /*width: 100%;*/
+/*}*/
 .item-image{
   padding: 4px 0px;
   text-align: center;

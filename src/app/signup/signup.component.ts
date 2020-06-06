@@ -158,6 +158,7 @@ export class SignupComponent implements OnInit {
                  isVerified: data.isVerified
                };
 
+
                for (var i = 0; i < data.plans.length; i++) {
                  this.dietService.savedPlansArray[i] = data.plans[i].plan;
                  this.dietService.savedPlansNametags[i] = data.plans[i].nameTags;
@@ -320,7 +321,7 @@ export class SignupComponent implements OnInit {
    this.debounce2(2000);
  }
  passwordCheck(){
-    console.log(this.signupForm.value.pwd,this.signupForm.value.cpwd);
+    // console.log(this.signupForm.value.pwd,this.signupForm.value.cpwd);
    if(this.signupForm.value.pwd == this.signupForm.value.cpwd) {
      this.passCheck = true;
    }

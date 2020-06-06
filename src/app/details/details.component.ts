@@ -108,13 +108,16 @@ screenWidth(){
 }
 
   bmrCalc(){
+    var weight1 = this.dietPlanService.userCredentials.weight;
+    var height1 = (this.dietPlanService.userCredentials.feet *30.48) + (this.dietPlanService.userCredentials.inch * 2.54);
+    var age = this.calculateAge(this.dietPlanService.userCredentials.dob);
     if(this.dietPlanService.userCredentials.gender == 'male'){
-      var weight1 = this.dietPlanService.userCredentials.weight;
-      var height1 = (this.dietPlanService.userCredentials.feet *30.48) + (this.dietPlanService.userCredentials.inch * 2.54);
-      var age = this.calculateAge(this.dietPlanService.userCredentials.dob);
 
-      // console.log(age);
       this.bmr = (10 *weight1) + (6.25 * height1) - (5*age) + 5;
+    }
+    else if(this.dietPlanService.userCredentials.gender == 'female'){
+
+      this.bmr = (10 *weight1) + (6.25 * height1) - (5*age) + 161;
     }
   }
 

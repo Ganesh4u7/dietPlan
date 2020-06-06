@@ -1,0 +1,68 @@
+
+
+<div class="main-container">
+
+
+
+  <div class="login">
+
+    <form  [formGroup]="loginForm" (ngSubmit)="onLogin()" >
+
+      <fieldset>
+        <h1 class=" pull-center" style="color: #006600"> Login </h1>
+
+        <div class="form-group">
+          <input type="email" id="lusername" class="form-control input-lg" placeholder="username or email"
+                 formControlName="username"
+
+                 required
+          >
+          <span class="text-muted" *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username']?.touched"> Please enter a valid username</span>
+        </div>
+        <div class="form-group">
+          <input type="password" id="lpassword" class="form-control input-lg" placeholder="Password"
+                 formControlName="pwd"
+
+                 required
+          >
+          <span class="text-muted" *ngIf="!loginForm.controls['pwd'].valid && loginForm.controls['pwd']?.touched"> Please enter a valid Password</span>
+        </div>
+        <!--<span *ngIf="!loginStatus" style="color: red;font-family: 'Lobster', 'cursive';"> Invalid Credentials </span>-->
+        <div>
+          <button type="submit" class="btn btn-lg btn-success" [disabled]="!loginForm.valid" value="Sign In">Sign In</button>
+        </div>
+
+        <p *ngIf="falseStatus == true" style="text-align: center;color: #ff7f6a">Invalid Credentials</p>
+        <p *ngIf="falseStatus == false" style="text-align: center;color: #00b000">Valid Credentials</p>
+        <a *ngIf="falseStatus == true" style="color: blue; text-decoration: underline;cursor: pointer;" (click)="forgotPassword()">forgot password ?</a>
+        <div class="verification" *ngIf="verification == false" >
+          <p>Your Account isn't Verified</p>
+          <p><i (click)="verifyAccount()">Click Here </i> for Verification Process</p>
+          <p style="margin-top: 30px"><i (click)="moveToHomepage()">Click Here </i> to skip verification process and Continue to Home page</p>
+        </div>
+
+      </fieldset>
+    </form>
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //January is 0!
+  let yyyy = today.getFullYear();
+  if(dd<10){
+    dd='0'+dd
+  }
+  if(mm<10){
+    mm='0'+mm
+  }
+
+  today = yyyy+'-'+mm+'-'+dd;
+  document.getElementById("datefield").setAttribute("max", today);
+</script>

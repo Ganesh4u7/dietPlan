@@ -1,5 +1,5 @@
 <div class="parallax">
-<app-nav-bar ></app-nav-bar>
+  <app-nav-bar ></app-nav-bar>
   <div id="plan-menu">
     <div class="item-type1 dietPlan" [ngClass]="{'active': planSelectedButton == 'createDietPlan'}" (click)="hide(0)" >
       <a  style=" margin-right: 8px;" >Create Diet Plan</a>
@@ -12,202 +12,202 @@
     <h2 style="text-align: center; margin-top: 30px;
      margin-bottom: 30px;"> Create Your Diet Plan</h2>
   </div>
-<div id="main-container">
-  <div id="box-1">
-    <h2>Items List </h2>
+  <div id="main-container">
+    <div id="box-1">
+      <h2>Items List </h2>
       <div class="seperator"></div>
 
-    <div id="items-menu">
-    <div class="left-scroll">
-      <a (click)="scrollLeft()"><i class="fas fa-caret-left" style="float: left; font-size: 30px;margin-top: 2px; " ></i></a>
+      <div id="items-menu">
+        <div class="left-scroll">
+          <a (click)="scrollLeft()"><i class="fas fa-caret-left" style="float: left; font-size: 30px;margin-top: 2px; " ></i></a>
 
-    </div>
-      <div id="item-types-container">
+        </div>
+        <div id="item-types-container">
 
-        <div class="item-type" id="1" [ngClass]="{ 'selected': currentSelectedbutton == 'vegetables' }" (click)="onMenuButtonSelect('vegetables')" >
-          <a  >Vegetables</a>
-        </div>
-        <div class="item-type"  id="2" [ngClass]="{ 'selected': currentSelectedbutton == 'fruits' }" (click)="onMenuButtonSelect('fruits')">
-          <a  >Fruits</a>
-        </div>
-        <div class="item-type" id="3" [ngClass]="{ 'selected': currentSelectedbutton == 'liquids' }" (click)="onMenuButtonSelect('liquids')">
-          <a >Liquids</a>
-        </div>
-        <div class="item-type" id="4" [ngClass]="{ 'selected': currentSelectedbutton == 'nuts' }" (click)="onMenuButtonSelect('nuts')">
-          <a >Nuts</a>
-        </div>
-        <div class="item-type" id="5" [ngClass]="{ 'selected': currentSelectedbutton == 'seeds' }" (click)="onMenuButtonSelect('seeds')">
-          <a >Seeds and Dal</a>
-        </div>
-        <div class="item-type" id="6" [ngClass]="{ 'selected': currentSelectedbutton == 'others' }" (click)="onMenuButtonSelect('others')">
-          <a >Others</a>
-        </div>
+          <div class="item-type" id="1" [ngClass]="{ 'selected': currentSelectedbutton == 'vegetables' }" (click)="onMenuButtonSelect('vegetables')" >
+            <a  >Vegetables</a>
+          </div>
+          <div class="item-type"  id="2" [ngClass]="{ 'selected': currentSelectedbutton == 'fruits' }" (click)="onMenuButtonSelect('fruits')">
+            <a  >Fruits</a>
+          </div>
+          <div class="item-type" id="3" [ngClass]="{ 'selected': currentSelectedbutton == 'liquids' }" (click)="onMenuButtonSelect('liquids')">
+            <a >Liquids</a>
+          </div>
+          <div class="item-type" id="4" [ngClass]="{ 'selected': currentSelectedbutton == 'nuts' }" (click)="onMenuButtonSelect('nuts')">
+            <a >Nuts</a>
+          </div>
+          <div class="item-type" id="5" [ngClass]="{ 'selected': currentSelectedbutton == 'seeds' }" (click)="onMenuButtonSelect('seeds')">
+            <a >Seeds and Dal</a>
+          </div>
+          <div class="item-type" id="6" [ngClass]="{ 'selected': currentSelectedbutton == 'others' }" (click)="onMenuButtonSelect('others')">
+            <a >Others</a>
+          </div>
 
+        </div>
+        <div class="right-scroll" style=" font-size: 30px;float: left;">
+          <a (click)="scrollRight()"> <i class="fas fa-caret-right"  style="margin-bottom: 5px;" > </i></a>
+        </div>
       </div>
-    <div class="right-scroll" style=" font-size: 30px;float: left;">
-      <a (click)="scrollRight()"> <i class="fas fa-caret-right"  style="margin-bottom: 5px;" > </i></a>
-    </div>
-    </div>
-    <div id="search"><input type="text" [(ngModel)]="searchText" (input)="onSearch(searchText)" placeholder=" Search Items"></div>
+      <div id="search"><input type="text" [(ngModel)]="searchText" (input)="onSearch(searchText)" placeholder=" Search Items"></div>
       <div id="large-screen"
-        cdkDropList
-        #toDoList = "cdkDropList"
-        [cdkDropListData]="selectedItemType"
-        [cdkDropListConnectedTo]="[doneList]"
-        class="example-list group"
-        (cdkDropListDropped)="drop($event,'todo')" >
+           cdkDropList
+           #toDoList = "cdkDropList"
+           [cdkDropListData]="selectedItemType"
+           [cdkDropListConnectedTo]="[doneList]"
+           class="example-list group"
+           (cdkDropListDropped)="drop($event,'todo')" >
 
         <div class="wrapper">
 
-            <!--<cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">-->
-        <div id="highlight" class="example-box group "
-          [style.background-color]="getBackgroundColor(i)"
-             *ngFor="let item of selectedItemType;let i = index ;"
-          cdkDrag (click)="clickLeft(i)">
-          <div class="drag-item " *ngIf="item.index != -1"
-              >
-            <div class="item-image">
-              <img src={{item.imgUrl}} alt="">
-            </div>
-            <!--<div class="selectItem">-->
-            <!--<a><i class="far fa-check-circle" style="font-size: 25px;color: #006600;float: right"></i></a>-->
-          <!--</div>-->
-            <div class="item-title">
-              <p class="title-text-1">{{item.name}}</p>
-              <p class="title-text-2">100 {{item.metric}}</p>
-
-            </div>
-
-            <div class="seperator"></div>
-            <p class="title-text-1">{{(100*item.kcal).toFixed(1)}} Calories</p>
-            <div class="left-scroll" style="margin-right: 10px">
-              <a (click)="scrollLeft1(i)"><i class="fas fa-caret-left" style="float: left; font-size: 30px; z-index: 99999;" ></i></a>
-
-            </div>
-            <div class="actual-items">
-            <div class="protein-box actual-type">
-              Protein : {{(100*item.protein).toFixed(1)}}g
-            </div>
-
-              <div class="carbs-box actual-type">
-                Carbs : {{(100*item.carbs).toFixed(1)}}g
-              </div>
-              <div class="fat-box actual-type">
-                Fat : {{(100*item.fat).toFixed(1)}}g
-              </div>
-              <div class="protein-box actual-type">
-                Sugar : {{(100*item.sugar).toFixed(1)}}g
-              </div>
-              <div class="carbs-box actual-type">
-                Sodium : {{(100*item.sodium).toFixed(1)}}g
-              </div>
-              <div class="fat-box actual-type">
-                Dietary Fiber : {{(100*item.DFib).toFixed(1)}}g
-              </div>
-              <div class="protein-box actual-type">
-                Saturated Fat : {{(100*item.sfat).toFixed(1)}}g
-              </div>
-
-            </div>
-            <div class="right-scroll" style=" margin-left: 10px; font-size: 30px;float: left;">
-              <a (click)="scrollRight1(i)" > <i class="fas fa-caret-right" style="margin-bottom: 10px; z-index: 99999;" > </i></a>
-            </div>
-            <p class="title-text-2"></p>
-          </div>
-        </div>
-            <!--</cdk-virtual-scroll-viewport>-->
-
-        </div>
-      </div>
-    <div id="small-screen"
-         cdkDropList
-         #toDoList = "cdkDropList"
-         [cdkDropListData]="selectedItemType"
-         [cdkDropListConnectedTo]="[doneList]"
-         class="example-list group"
-         (cdkDropListDropped)="drop($event,'todo')">
-
-
           <!--<cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">-->
-      <div class="wrapper">
-        <div id="highlight1" class="example-box group "
-             [style.background-color]="getBackgroundColor(i)"
-        *ngFor="let item of selectedItemType;let i = index ;"
-              (click)="clickLeft(i)">
-          <div class="drag-item">
-            <div class="item-image">
-              <img src={{item.imgUrl}} alt="">
+          <div id="highlight" class="example-box group "
+               [style.background-color]="getBackgroundColor(i)"
+               *ngFor="let item of selectedItemType;let i = index ;"
+               cdkDrag (click)="clickLeft(i)">
+            <div class="drag-item " *ngIf="item.index != -1"
+            >
+              <div class="item-image">
+                <img src={{item.imgUrl}} alt="">
+              </div>
+              <!--<div class="selectItem">-->
+              <!--<a><i class="far fa-check-circle" style="font-size: 25px;color: #006600;float: right"></i></a>-->
+              <!--</div>-->
+              <div class="item-title">
+                <p class="title-text-1">{{item.name}}</p>
+                <p class="title-text-2">100 {{item.metric}}</p>
+
+              </div>
+
+              <div class="seperator"></div>
+              <p class="title-text-1">{{(100*item.kcal).toFixed(1)}} Calories</p>
+              <div class="left-scroll" style="margin-right: 10px">
+                <a (click)="scrollLeft1(i)"><i class="fas fa-caret-left" style="float: left; font-size: 30px; z-index: 99999;" ></i></a>
+
+              </div>
+              <div class="actual-items">
+                <div class="protein-box actual-type">
+                  Protein : {{(100*item.protein).toFixed(1)}}g
+                </div>
+
+                <div class="carbs-box actual-type">
+                  Carbs : {{(100*item.carbs).toFixed(1)}}g
+                </div>
+                <div class="fat-box actual-type">
+                  Fat : {{(100*item.fat).toFixed(1)}}g
+                </div>
+                <div class="protein-box actual-type">
+                  Sugar : {{(100*item.sugar).toFixed(1)}}g
+                </div>
+                <div class="carbs-box actual-type">
+                  Sodium : {{(100*item.sodium).toFixed(1)}}g
+                </div>
+                <div class="fat-box actual-type">
+                  Dietary Fiber : {{(100*item.DFib).toFixed(1)}}g
+                </div>
+                <div class="protein-box actual-type">
+                  Saturated Fat : {{(100*item.sfat).toFixed(1)}}g
+                </div>
+
+              </div>
+              <div class="right-scroll" style=" margin-left: 10px; font-size: 30px;float: left;">
+                <a (click)="scrollRight1(i)" > <i class="fas fa-caret-right" style="margin-bottom: 10px; z-index: 99999;" > </i></a>
+              </div>
+              <p class="title-text-2"></p>
             </div>
-
-            <div class="item-title">
-              <p class="title-text-1">{{item.name}}<a (click)="moveToChoosen(i)"><i class="fas fa-plus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
-              <p class="title-text-2">100 {{item.metric}}</p>
-
-            </div>
-
-            <div class="seperator"></div>
-            <p class="title-text-1">{{(100*item.kcal).toFixed(1)}} Calories</p>
-            <div class="left-scroll" style="margin-right: 10px">
-              <a (click)="scrollLeft1(i)"><i class="fas fa-caret-left" style="float: left; font-size: 30px; z-index: 99999;" ></i></a>
-
-            </div>
-            <div class="actual-items1">
-              <div class="protein-box actual-type">
-                Protein : {{(100*item.protein).toFixed(1)}}g
-              </div>
-
-              <div class="carbs-box actual-type">
-                Carbs : {{(100*item.carbs).toFixed(1)}}g
-              </div>
-              <div class="fat-box actual-type">
-                Fat : {{(100*item.fat).toFixed(1)}}g
-              </div>
-              <div class="protein-box actual-type">
-                Sugar : {{(100*item.sugar).toFixed(1)}}g
-              </div>
-              <div class="carbs-box actual-type">
-                Sodium : {{(100*item.sodium).toFixed(1)}}g
-              </div>
-              <div class="fat-box actual-type">
-                Dietary Fiber : {{(100*item.DFib).toFixed(1)}}g
-              </div>
-              <div class="protein-box actual-type">
-                Saturated Fat : {{(100*item.sfat).toFixed(1)}}g
-              </div>
-
-            </div>
-            <div class="right-scroll" style=" margin-left: 10px; font-size: 30px;float: left;">
-              <a (click)="scrollRight1(i)" > <i class="fas fa-caret-right" style="margin-bottom: 10px; z-index: 99999;" > </i></a>
-            </div>
-            <p class="title-text-2"></p>
           </div>
-        </div>
-      </div>
           <!--</cdk-virtual-scroll-viewport>-->
 
+        </div>
+      </div>
+      <div id="small-screen"
+           cdkDropList
+           #toDoList = "cdkDropList"
+           [cdkDropListData]="selectedItemType"
+           [cdkDropListConnectedTo]="[doneList]"
+           class="example-list group"
+           (cdkDropListDropped)="drop($event,'todo')">
 
+
+        <!--<cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">-->
+        <div class="wrapper">
+          <div id="highlight1" class="example-box group "
+               [style.background-color]="getBackgroundColor(i)"
+               *ngFor="let item of selectedItemType;let i = index ;"
+               (click)="clickLeft(i)">
+            <div class="drag-item">
+              <div class="item-image">
+                <img src={{item.imgUrl}} alt="">
+              </div>
+
+              <div class="item-title">
+                <p class="title-text-1">{{item.name}}<a (click)="moveToChoosen(i)"><i class="fas fa-plus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
+                <p class="title-text-2">100 {{item.metric}}</p>
+
+              </div>
+
+              <div class="seperator"></div>
+              <p class="title-text-1">{{(100*item.kcal).toFixed(1)}} Calories</p>
+              <div class="left-scroll" style="margin-right: 10px">
+                <a (click)="scrollLeft1(i)"><i class="fas fa-caret-left" style="float: left; font-size: 30px; z-index: 99999;" ></i></a>
+
+              </div>
+              <div class="actual-items1">
+                <div class="protein-box actual-type">
+                  Protein : {{(100*item.protein).toFixed(1)}}g
+                </div>
+
+                <div class="carbs-box actual-type">
+                  Carbs : {{(100*item.carbs).toFixed(1)}}g
+                </div>
+                <div class="fat-box actual-type">
+                  Fat : {{(100*item.fat).toFixed(1)}}g
+                </div>
+                <div class="protein-box actual-type">
+                  Sugar : {{(100*item.sugar).toFixed(1)}}g
+                </div>
+                <div class="carbs-box actual-type">
+                  Sodium : {{(100*item.sodium).toFixed(1)}}g
+                </div>
+                <div class="fat-box actual-type">
+                  Dietary Fiber : {{(100*item.DFib).toFixed(1)}}g
+                </div>
+                <div class="protein-box actual-type">
+                  Saturated Fat : {{(100*item.sfat).toFixed(1)}}g
+                </div>
+
+              </div>
+              <div class="right-scroll" style=" margin-left: 10px; font-size: 30px;float: left;">
+                <a (click)="scrollRight1(i)" > <i class="fas fa-caret-right" style="margin-bottom: 10px; z-index: 99999;" > </i></a>
+              </div>
+              <p class="title-text-2"></p>
+            </div>
+          </div>
+        </div>
+        <!--</cdk-virtual-scroll-viewport>-->
+
+
+      </div>
     </div>
-  </div>
-  <div id="box-2">
-    <div id="arrows-mobile">
-      <a (click)="leftMove()">
-        <i class="fas fa-arrow-alt-circle-up" style="width: 25px;height: 25px"></i>
-      </a>
-      <a (click)="rightMove()">
-        <i class="fas fa-arrow-alt-circle-down" style="width: 25px;height: 25px"></i>
-      </a>
+    <div id="box-2">
+      <div id="arrows-mobile">
+        <a (click)="leftMove()">
+          <i class="fas fa-arrow-alt-circle-up" style="width: 25px;height: 25px"></i>
+        </a>
+        <a (click)="rightMove()">
+          <i class="fas fa-arrow-alt-circle-down" style="width: 25px;height: 25px"></i>
+        </a>
+      </div>
+      <div id="arrows-desktop">
+        <a (click)="leftMove()">
+          <i class="fas fa-arrow-alt-circle-left" style="width: 25px;height: 25px"></i>
+        </a>
+        <a (click)="rightMove()">
+          <i class="fas fa-arrow-alt-circle-right" style="width: 25px;height: 25px"></i>
+        </a>
+      </div>
     </div>
-    <div id="arrows-desktop">
-      <a (click)="leftMove()">
-        <i class="fas fa-arrow-alt-circle-left" style="width: 25px;height: 25px"></i>
-      </a>
-      <a (click)="rightMove()">
-        <i class="fas fa-arrow-alt-circle-right" style="width: 25px;height: 25px"></i>
-      </a>
-    </div>
-  </div>
-  <div id="box-3">
-    <h2>Choosen Items</h2>
+    <div id="box-3">
+      <h2>Choosen Items</h2>
       <div class="seperator"></div>
       <div
         cdkDropList
@@ -218,9 +218,9 @@
         class="example-list "
         (cdkDropListDropped)="drop($event,'done')">
         <div style="padding: 8px;" class="example-box group"
-          [style.background-color]="getBackgroundColorRight(i)"
-          *ngFor="let item of done;let i = index;"
-          cdkDrag (click)="clickRight(i)">
+             [style.background-color]="getBackgroundColorRight(i)"
+             *ngFor="let item of done;let i = index;"
+             cdkDrag (click)="clickRight(i)">
           <div class="drag-item">
             <div class="item-image">
               <img src={{item.imgUrl}} alt="">
@@ -247,44 +247,44 @@
           </div>
         </div>
       </div>
-    <div
-         cdkDropList
-         #doneList="cdkDropList"
-         [cdkDropListData]="done"
-         [cdkDropListConnectedTo]="toDoList"
-         id="choosen-items1"
-         class="example-list "
-         (cdkDropListDropped)="drop($event,'done')">
-      <div style="padding: 8px;" class="example-box group"
-           [style.background-color]="getBackgroundColorRight(i)"
-           *ngFor="let item of done;let i = index;"
-            (click)="clickRight(i)">
-        <div class="drag-item">
-          <div class="item-image">
-            <img src={{item.imgUrl}} alt="">
-          </div>
-          <div class="item-title">
-            <p class="title-text-1">{{item.name}}<a (click)="moveToItemslist(i)" style="z-index: 99999;"><i class="fas fa-minus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
-            <div id="quantity-edit-container">
-              <input type="number" class="form-control" value="100" #weight (click)="clickRight(i)"> &nbsp;{{item.metric}}
-              <button class="btn btn-success" (click)="add(i,weight)">add</button>
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="toDoList"
+        id="choosen-items1"
+        class="example-list "
+        (cdkDropListDropped)="drop($event,'done')">
+        <div style="padding: 8px;" class="example-box group"
+             [style.background-color]="getBackgroundColorRight(i)"
+             *ngFor="let item of done;let i = index;"
+             (click)="clickRight(i)">
+          <div class="drag-item">
+            <div class="item-image">
+              <img src={{item.imgUrl}} alt="">
             </div>
+            <div class="item-title">
+              <p class="title-text-1">{{item.name}}<a (click)="moveToItemslist(i)" style="z-index: 99999;"><i class="fas fa-minus-circle" style="font-size: 25px;color: #006600;float: right;margin-top: 10px;margin-right: 10px;"></i></a></p>
+              <div id="quantity-edit-container">
+                <input type="number" class="form-control" value="100" #weight (click)="clickRight(i)"> &nbsp;{{item.metric}}
+                <button class="btn btn-success" (click)="add(i,weight)">add</button>
+              </div>
+            </div>
+            <div class="seperator"></div>
+            <p class="title-text-1">{{(item.sWeight *item.kcal).toFixed(1)}} Calories</p>
+            <div class="protein-box">
+              Protein : {{(item.sWeight*item.protein).toFixed(1)}}g
+            </div>
+            <div class="carbs-box">
+              Carbs : {{(item.sWeight*item.carbs).toFixed(1)}}g
+            </div>
+            <div class="fat-box">
+              Fat : {{(item.sWeight*item.fat).toFixed(1)}}g
+            </div>
+            <p class="title-text-2"></p>
           </div>
-          <div class="seperator"></div>
-          <p class="title-text-1">{{(item.sWeight *item.kcal).toFixed(1)}} Calories</p>
-          <div class="protein-box">
-            Protein : {{(item.sWeight*item.protein).toFixed(1)}}g
-          </div>
-          <div class="carbs-box">
-            Carbs : {{(item.sWeight*item.carbs).toFixed(1)}}g
-          </div>
-          <div class="fat-box">
-            Fat : {{(item.sWeight*item.fat).toFixed(1)}}g
-          </div>
-          <p class="title-text-2"></p>
         </div>
       </div>
-    </div>
       <div id="total-container">
         <h2>Total</h2>
         <div class="seperator"></div>
@@ -292,20 +292,20 @@
         <p class="desktop">Protein : {{(total.protein).toFixed(1)}}g &nbsp;&nbsp;
           Carbs : {{(total.carbs).toFixed(1)}}g &nbsp;&nbsp; Fat : {{(total.fat).toFixed(1)}}g</p>
         <p class="mobile">Protein : {{(total.protein).toFixed(1)}}g &nbsp;
-            Carbs : {{(total.carbs).toFixed(1)}}g &nbsp; Fat : {{(total.fat).toFixed(1)}}g</p>
+          Carbs : {{(total.carbs).toFixed(1)}}g &nbsp; Fat : {{(total.fat).toFixed(1)}}g</p>
         <p id="name-tag">Name Tag : </p>
         <input id="name-tag-input" class="form-control" type="text" #tag>
         <button id="save-plan-btn" class="btn btn-success" (click)="savePlan(tag)" [disabled]="done.length == 0">Save Plan</button>
       </div>
-    <!--<div class="publish-container">-->
+      <!--<div class="publish-container">-->
       <!--<button id="publish-btn" class="btn btn-primary" (click)="publishPlan()" [disabled]="done.length == 0"> Publish this plan.</button>-->
-    <!--<div class="publish-recipe" *ngIf="publishPlanTextArea == true">-->
+      <!--<div class="publish-recipe" *ngIf="publishPlanTextArea == true">-->
 
       <!--<textarea rows="5" cols="50" #recipe></textarea>-->
-    <!--</div>-->
+      <!--</div>-->
 
-    <!--</div>-->
+      <!--</div>-->
+    </div>
   </div>
-</div>
   <app-workout-plan id="hide"></app-workout-plan>
 </div>
