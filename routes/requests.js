@@ -20,7 +20,7 @@ var itemsData = mongoose.model('itemsData',itemsSchema);
 
 router.post('/login',function (req,res) {
 
- // console.log(req.body);
+ console.log(req.body);
   let username = req.body.username;
   let pwd = req.body.password;
   let query;
@@ -113,8 +113,40 @@ router.post('/getData',verifyToken,function(req,res){
               let inch = data1[0].inch;
               let plans = data1[0].plans;
               let workoutPlans = data1[0].workoutPlans;
+              let vegetables,fruits,nuts,seeds,nonVeg,liquids,others;
               var pData ;
               publishedPlansData.find({},function (err3,data3) {
+
+                // itemsData.find({itemType:'vegetables'},{_id:0},function (err4,data4) {
+                //   if(err4){console.log(err4)}
+                //   else{ vegetables = data4}
+                // });
+                //
+                // itemsData.find({itemType:'fruits'},{_id:0},function (err4,data4) {
+                //   if(err4){console.log(err4)}
+                //   else{console.log(data4); fruits = data4}
+                // });
+                // itemsData.find({itemType:'nuts'},{_id:0},function (err4,data4) {
+                //   if(err4){console.log(err4)}
+                //   else{ nuts = data4}
+                // });
+                // itemsData.find({itemType:'seeds'},{_id:0},function (err4,data4) {
+                //   if(err4){console.log(err4)}
+                //   else{ seeds = data4}
+                // });
+                // itemsData.find({itemType:'non-veg'},{_id:0},function (err4,data4) {
+                //   if(err4){console.log(err4)}
+                //   else{ nonVeg = data4}
+                // });
+                // itemsData.find({itemType:'liquids'},{_id:0},function (err4,data4) {
+                //   if(err4){console.log(err4)}
+                //   else{ liquids = data4}
+                // });
+                // itemsData.find({itemType:'others'},{_id:0},function (err4,data4) {
+                //   if(err4){console.log(err4)}
+                //   else{ others = data4}
+                // });
+
               //  console.log(data3);
                  pData = data3;
                 res.send({username:username,password:pwd,dob:dob,email:email,gender:gender,weight:weight,feet:feet,inch:inch,plans:plans,workoutPlans:workoutPlans,publishedPlans:data3,success:true});
@@ -207,46 +239,48 @@ router.post('/signup',function (req,res) {
 router.post('/plans',function (req,res) {
 
   let plan = req.body[0];
- // console.log(plan);
- let nameTags = req.body[1];
+  // console.log(plan);
+  let nameTags = req.body[1];
   let totals = req.body[2];
   let username = req.body[3].username;
   let tot = req.body[3].tot;
-
-  userData.find({username:username},function (err,data) {
-    if(err){console.log(err)}
-    else{
+if(username != null){
+  userData.find({username: username}, function (err, data) {
+    if (err) {
+      console.log(err)
+    }
+    else {
 
       const info = data[0];
 
-      const changes = {"nameTags": nameTags,"plan" : plan, "totals": totals};
+      const changes = {"nameTags": nameTags, "plan": plan, "totals": totals};
 
       info.plans.push(changes);
-      info.save(function(err,data) {
+      info.save(function (err, data) {
         if (err) {
           console.log(err);
         }
-        else{
-         // console.log(data);
+        else {
+          // console.log(data);
         }
         let id1;
-        if(tot != 0){
+        if (tot != 0) {
           id1 = data.plans[tot].id;
-          return res.send({id:id1,success:true});
+          return res.send({id: id1, success: true});
         }
-        else if(tot == 0){
+        else if (tot == 0) {
           console.log(data.plans[0].id)
           id1 = data.plans[0].id;
-          return res.send({id:id1,success:true});
+          return res.send({id: id1, success: true});
         }
 
 
-       // console.log(id1)
+        // console.log(id1)
 
       })
     }
   });
-
+}
 
 });
 

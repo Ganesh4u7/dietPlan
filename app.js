@@ -38,12 +38,24 @@ app.use(function(req, res, next) {
 });
 
 app.use(express.static(path.join(__dirname, './dist/dietplan')));
-// app.get('/',function(req,res){
-//   res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
-// });
-app.all('/', function(req, res, next) {
+app.get('/',function(req,res){
   res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
 });
+app.get('/login',function(req,res){
+  res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
+});
+app.get('/signup',function(req,res){
+  res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
+});
+app.get('/covid',function(req,res){
+  res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
+});
+app.get('/create-plan',function(req,res){
+  res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
+});
+// app.all('*', function(req, res, next) {
+//   res.sendFile(path.join(__dirname,"./dist/dietplan/index.html"));
+// });
 app.use('',require('./routes/requests'));
 
 module.exports = app;
