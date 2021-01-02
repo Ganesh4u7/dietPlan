@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-const uri = "mongodb://roger:thebest1@ds027495.mlab.com:27495/diet-plan";
+const uri = "mongodb+srv://ganesh:thebest1@cluster0.e6tdc.mongodb.net/diet-plan?retryWrites=true&w=majority";
 mongoose.connect(uri,{ useNewUrlParser: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));

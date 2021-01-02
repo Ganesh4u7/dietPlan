@@ -21,7 +21,7 @@ export class CreatePlanComponent implements OnInit {
   planSelectedButton: string = 'createDietPlan';
   menuButtonSubscription: Subscription;
   publishPlanTextArea = false;
-  lastIndex = 5;
+  lastIndex = 10;
   scrollvalue =false;
 
   searchText;
@@ -65,7 +65,7 @@ export class CreatePlanComponent implements OnInit {
     // this.vegetables = this.dietPlanService.vegetables;
 
     this.vegetables = this.dietPlanService.vegetables;
-    this.selectedItemType = this.vegetables;
+    this.selectedItemType = this.vegetables.slice(0,10);
     this.selectedItemType1 = this.selectedItemType;
     this.fruits = this.dietPlanService.fruits;
     this.nuts = this.dietPlanService.nuts;
@@ -414,19 +414,25 @@ export class CreatePlanComponent implements OnInit {
   changeItems(itemType){
 
     if(itemType =="vegetables"){
-      this.selectedItemType=this.vegetables;
+      this.selectedItemType=this.vegetables.slice(0,10);
+      this.lastIndex =10;
       this.lastSelectedItemName = itemType;
+      document.getElementById('small-screen').scrollTop = 0;
     }
     else if (itemType =="fruits"){
-      this.selectedItemType=this.fruits;
+      this.selectedItemType=this.fruits.slice(0,10);
+      this.lastIndex =10;
       this.lastSelectedItemName = itemType;
+      document.getElementById('small-screen').scrollTop = 0;
     }
     else if (itemType =="seeds"){
-      this.selectedItemType=this.seeds;
+      this.selectedItemType=this.seeds.slice(0,10);
+      this.lastIndex =10;
       this.lastSelectedItemName = itemType;
     }
     else if (itemType =="nuts"){
-      this.selectedItemType=this.nuts;
+      this.selectedItemType=this.nuts.slice(0,10);
+      this.lastIndex =10;
       this.lastSelectedItemName = itemType;
     }
     else if (itemType =="liquids"){
@@ -1127,4 +1133,103 @@ export class CreatePlanComponent implements OnInit {
   // onScrollUp() {
   //   console.log('scrolled up!!');
   // }
+
+  scrolled(){
+    let divHeight = document.getElementById('large-screen');
+      if(divHeight.offsetHeight + divHeight.scrollTop >= divHeight.scrollHeight){
+        console.log('end reached');
+      }
+  }
+  scrolled1(){
+    let divHeight = document.getElementById('small-screen');
+    let count = 0;
+    if(this.lastSelectedItemName == 'vegetables') {
+      if (divHeight.offsetHeight + divHeight.scrollTop >= divHeight.scrollHeight) {
+        if(this.vegetables.length >10) {
+          if (this.lastIndex != 99999) {
+            for (let i = this.lastIndex; i < this.lastIndex + 5; i++) {
+              this.selectedItemType.push(this.vegetables[i]);
+              if (i + 1 == this.vegetables.length) {
+                this.lastIndex = 99999;
+                break;
+              }
+              else if (count == 4) {
+                this.lastIndex = this.lastIndex + 5;
+                break;
+              }
+              else {
+                count++;
+              }
+            }
+          }
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'fruits') {
+      if (divHeight.offsetHeight + divHeight.scrollTop >= divHeight.scrollHeight) {
+        if(this.fruits.length > 10) {
+          if (this.lastIndex != 99999) {
+            for (let i = this.lastIndex; i < this.lastIndex + 5; i++) {
+              this.selectedItemType.push(this.fruits[i]);
+              if (i + 1 == this.fruits.length) {
+                this.lastIndex = 99999;
+                break;
+              }
+              else if (count == 4) {
+                this.lastIndex = this.lastIndex + 5;
+                break;
+              }
+              else {
+                count++;
+              }
+            }
+          }
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'seeds') {
+      if (divHeight.offsetHeight + divHeight.scrollTop >= divHeight.scrollHeight) {
+        if(this.seeds.length > 10) {
+          if (this.lastIndex != 99999) {
+            for (let i = this.lastIndex; i < this.lastIndex + 5; i++) {
+              this.selectedItemType.push(this.seeds[i]);
+              if (i + 1 == this.seeds.length) {
+                this.lastIndex = 99999;
+                break;
+              }
+              else if (count == 4) {
+                this.lastIndex = this.lastIndex + 5;
+                break;
+              }
+              else {
+                count++;
+              }
+            }
+          }
+        }
+      }
+    }
+    else if(this.lastSelectedItemName == 'nuts') {
+      if (divHeight.offsetHeight + divHeight.scrollTop >= divHeight.scrollHeight) {
+        if(this.nuts.length > 10) {
+          if (this.lastIndex != 99999) {
+            for (let i = this.lastIndex; i < this.lastIndex + 5; i++) {
+              this.selectedItemType.push(this.nuts[i]);
+              if (i + 1 == this.nuts.length) {
+                this.lastIndex = 99999;
+                break;
+              }
+              else if (count == 4) {
+                this.lastIndex = this.lastIndex + 5;
+                break;
+              }
+              else {
+                count++;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

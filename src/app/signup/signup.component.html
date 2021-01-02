@@ -1,13 +1,14 @@
 
 
 <div class="main-container">
-
+ 
   <div class="signup">
+    
     <form  [formGroup]="signupForm" (ngSubmit)="onSignUp()" >
-
+     
       <fieldset>
         <div>
-
+         
           <h1 class=" pull-center"> Sign Up</h1>
           <div class="form-group">
             <input type="text"  id="username" class="form-control input-lg"
@@ -108,8 +109,7 @@
                  required
           >
         </div>
-
-        <div>
+        <div class=" text-center">
           <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid" style="margin-top: 20px" > Submit</button>
         </div>
         <p *ngIf="signUpStatus == true" style="color: #1fd302;text-align: center">Sign up Completed ,A verification Email has been sent to your Email.</p>

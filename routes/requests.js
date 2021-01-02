@@ -636,7 +636,7 @@ router.post('/forgotPassword',function (req,res) {
                 service: 'gmail',
                 auth: {
                   user: 'knowyourcaloriess@gmail.com',
-                  pass: 'FEDERER@123'
+                  pass: 'TheBest@123'
                 }
               });
               let mailOptions = {

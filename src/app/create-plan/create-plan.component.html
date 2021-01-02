@@ -55,7 +55,7 @@
            [cdkDropListData]="selectedItemType"
            [cdkDropListConnectedTo]="[doneList]"
            class="example-list group"
-           (cdkDropListDropped)="drop($event,'todo')" >
+           (cdkDropListDropped)="drop($event,'todo')" (scroll)="scrolled()"  >
 
         <div class="wrapper">
 
@@ -65,6 +65,7 @@
                *ngFor="let item of selectedItemType;let i = index ;"
                cdkDrag (click)="clickLeft(i)">
             <div class="drag-item " *ngIf="item.index != -1"
+
             >
               <div class="item-image">
                 <img src={{item.imgUrl}} alt="">
@@ -125,7 +126,7 @@
            [cdkDropListData]="selectedItemType"
            [cdkDropListConnectedTo]="[doneList]"
            class="example-list group"
-           (cdkDropListDropped)="drop($event,'todo')">
+           (cdkDropListDropped)="drop($event,'todo')" (scroll)="scrolled1()">
 
 
         <!--<cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">-->
@@ -309,3 +310,5 @@
   </div>
   <app-workout-plan id="hide"></app-workout-plan>
 </div>
+
+

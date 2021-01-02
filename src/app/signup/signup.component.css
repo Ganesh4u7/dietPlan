@@ -41,7 +41,7 @@ position: absolute;
   width: 50%;
 }
 .signup .height input{
-  width: 40%;
+  width: 45%;
   margin-right: 10px;
   float: left;
 }
@@ -104,5 +104,9 @@ body{
   margin-right: 5px;
   color: #006600;
   cursor: pointer;
+}
+
+.submitBtn{
+  width: 100%;
 }
 

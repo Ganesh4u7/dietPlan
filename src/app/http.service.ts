@@ -187,7 +187,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  //
+  
   // onSignup(data) {
   //   return this.http.post('http://localhost:4300/signup', data, {responseType: 'json'}).pipe(
   //     map((data: any) => {
@@ -196,7 +196,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  //
+  
   // onSendPlans(data) {
   //   return this.http.post('http://localhost:4300/plans', data, {responseType: 'json'}).pipe(
   //     map((data: any) => {
@@ -204,8 +204,8 @@ export class HttpService {
   //     }), catchError(error => {
   //       return throwError('Something went wrong!');
   //     }));
-  //
-  //
+  
+  
   // }
   // onEditName(data){
   //   return this.http.post('http://localhost:4300/editname', data,{responseType: 'text'}).pipe(
@@ -223,7 +223,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  //
+  
   // onSaveRecipeName(data){
   //   return this.http.post('http://localhost:4300/saveRecipeName', data,{responseType: 'text'}).pipe(
   //     map((data: any) => {
@@ -232,7 +232,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  //
+  
   // onSendWorkoutPlans(data) {
   //   return this.http.post('http://localhost:4300/workoutPlans', data, {responseType: 'json'}).pipe(
   //     map((data: any) => {
@@ -240,8 +240,8 @@ export class HttpService {
   //     }), catchError(error => {
   //       return throwError('Something went wrong!');
   //     }));
-  //
-  //
+  
+  
   // }
   // onDeleteWorkoutPlan(data){
   //   return this.http.post('http://localhost:4300/deleteWorkoutPlan', data,{responseType: 'text'}).pipe(
@@ -251,7 +251,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  //
+  
   // onEditWorkoutName(data){
   //   return this.http.post('http://localhost:4300/editWorkoutName', data,{responseType: 'text'}).pipe(
   //     map((data: any) => {
@@ -260,7 +260,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  //
+  
   // onGetData(data) {
   //   let headers   = new HttpHeaders();
   //   return this.http.post('http://localhost:4300/getData', data,{
@@ -327,7 +327,7 @@ export class HttpService {
   //       return throwError('Something went wrong!');
   //     }));
   // }
-  //
+  
   // onCheckUsername(data){
   //   return this.http.post('http://localhost:4300/checkUsername', data, {responseType: 'json'}).pipe(
   //     map((data: any) => {
